@@ -74,8 +74,8 @@ export default function TechStack() {
   return (
     <section className="py-12 sm:py-16 md:py-20 bg-gray-900 overflow-hidden relative">
       {/* Softer gradient overlay - only at far edges */}
-      <div className="absolute inset-y-0 left-0 w-16 sm:w-24 md:w-32 bg-gradient-to-r from-gray-900 to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-16 sm:w-24 md:w-32 bg-gradient-to-l from-gray-900 to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-16 sm:w-24 md:w-32 bg-linear-to-r from-gray-900 to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-16 sm:w-24 md:w-32 bg-linear-to-l from-gray-900 to-transparent z-10 pointer-events-none" />
       
       <Container>
         <motion.div
@@ -86,7 +86,7 @@ export default function TechStack() {
           className="text-center"
         >
           <SectionTitle subtitle="Technologies I work with">
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Tech Stack
             </span>
           </SectionTitle>
@@ -230,7 +230,7 @@ export default function TechStack() {
       {/* Ambient background glow - more subtle */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-2xl sm:max-w-3xl md:max-w-4xl opacity-40 sm:opacity-50">
         <motion.div
-          className="w-full h-full bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-3xl"
+          className="w-full h-full bg-linear-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],

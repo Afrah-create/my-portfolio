@@ -109,7 +109,7 @@ const pulseVariants = {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 flex items-center py-20 overflow-hidden">
+    <section className="relative min-h-screen bg-linear-to-br from-gray-950 via-gray-900 to-gray-950 flex items-center py-20 overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -184,7 +184,7 @@ export default function Hero() {
               animate="visible"
               className="space-y-3"
             >
-              <p className="text-xl sm:text-2xl md:text-3xl font-semibold bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <p className="text-xl sm:text-2xl md:text-3xl font-semibold bg-linear-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 Software Engineering Student
               </p>
               <p className="text-base sm:text-lg md:text-xl text-gray-400">
@@ -275,7 +275,7 @@ export default function Hero() {
                 <motion.div
                   variants={pulseVariants}
                   animate="animate"
-                  className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 opacity-30 blur-2xl"
+                  className="absolute -inset-4 rounded-full bg-linear-to-r from-cyan-500 via-blue-500 to-cyan-500 opacity-30 blur-2xl"
                 />
                 
                 {/* Rotating gradient border */}

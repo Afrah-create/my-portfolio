@@ -44,7 +44,7 @@ export default function AboutPage() {
           transition={{ duration: 0.6 }}
         >
           <SectionTitle subtitle="Learn more about my journey">
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               About Me
             </span>
           </SectionTitle>
@@ -66,7 +66,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="lg:col-span-1 order-1 lg:order-1"
               >
-                <div className="relative mx-auto max-w-[280px] sm:max-w-[320px] lg:max-w-none">
+                <div className="relative mx-auto max-w-70 sm:max-w-80 lg:max-w-none">
                   <div className="relative aspect-square w-full rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-700/50">
                     <Image
                       src="/profile.jpg"
@@ -75,11 +75,11 @@ export default function AboutPage() {
                       className="object-cover"
                       priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-gray-900/40 via-transparent to-transparent" />
                   </div>
                   
                   {/* Decorative glow */}
-                  <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 blur-2xl -z-10 opacity-60" />
+                  <div className="absolute -inset-4 bg-linear-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 blur-2xl -z-10 opacity-60" />
                 </div>
 
                 {/* Quick Info Cards - Mobile/Tablet */}
@@ -96,7 +96,7 @@ export default function AboutPage() {
                       transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                       className="bg-gray-800/60 backdrop-blur-sm rounded-xl p-3 sm:p-4 text-center border border-gray-700/50"
                     >
-                      <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-1">
+                      <div className="text-xl sm:text-2xl font-bold bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-1">
                         {stat.value}
                       </div>
                       <div className="text-[10px] sm:text-xs text-gray-400 font-medium uppercase tracking-wide">
@@ -115,7 +115,7 @@ export default function AboutPage() {
                 className="lg:col-span-2 order-2 lg:order-2"
               >
                 <motion.div variants={itemVariants}>
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                     My Story
                   </h3>
                 </motion.div>
@@ -154,7 +154,7 @@ export default function AboutPage() {
                       whileHover={{ scale: 1.05, y: -4 }}
                       className="bg-gray-800/60 backdrop-blur-sm rounded-xl p-5 text-center border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
                     >
-                      <div className={`text-3xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}>
+                      <div className={`text-3xl font-bold bg-linear-to-r ${stat.color} bg-clip-text text-transparent mb-2`}>
                         {stat.value}
                       </div>
                       <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">
@@ -175,7 +175,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="mt-16 sm:mt-20 md:mt-24"
           >
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-center bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-center bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Skills & Technologies
             </h3>
 
@@ -186,7 +186,7 @@ export default function AboutPage() {
               viewport={{ once: true, margin: "-100px" }}
               className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5"
             >
-              {SKILLS.map((skill, index) => (
+              {SKILLS.map((skill) => (
                 <motion.div
                   key={skill}
                   variants={skillVariants}
@@ -198,8 +198,7 @@ export default function AboutPage() {
                   whileTap={{ scale: 0.98 }}
                   className="group relative bg-gray-800/60 backdrop-blur-sm border-2 border-gray-700/50 rounded-xl p-4 sm:p-5 text-center cursor-default overflow-hidden transition-all duration-300 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/20"
                 >
-                  {/* Gradient background on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-linear-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                   {/* Skill text */}
                   <span className="relative z-10 font-semibold text-sm sm:text-base text-gray-200 group-hover:text-white transition-colors duration-300">
@@ -208,7 +207,7 @@ export default function AboutPage() {
 
                   {/* Shine effect */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                    className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent"
                     initial={{ x: "-100%" }}
                     whileHover={{ x: "100%" }}
                     transition={{ duration: 0.6 }}
@@ -239,7 +238,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="mt-16 sm:mt-20 md:mt-24"
           >
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-center bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-center bg-linear-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
               Education & Achievements
             </h3>
 
@@ -253,7 +252,7 @@ export default function AboutPage() {
                 className="bg-gray-800/60 backdrop-blur-sm rounded-xl p-5 sm:p-6 md:p-8 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300"
               >
                 <div className="flex items-start gap-4">
-                  <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg p-3 shrink-0">
+                  <div className="bg-linear-to-br from-blue-500/20 to-purple-500/20 rounded-lg p-3 shrink-0">
                     <svg className="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
@@ -281,7 +280,7 @@ export default function AboutPage() {
                 className="bg-gray-800/60 backdrop-blur-sm rounded-xl p-5 sm:p-6 md:p-8 border border-gray-700/50 hover:border-pink-500/50 transition-all duration-300"
               >
                 <div className="flex items-start gap-4">
-                  <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg p-3 shrink-0">
+                  <div className="bg-linear-to-br from-purple-500/20 to-pink-500/20 rounded-lg p-3 shrink-0">
                     <svg className="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                     </svg>
