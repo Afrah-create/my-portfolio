@@ -9,15 +9,8 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60,
   },
 
-  // Bundle Analysis
-  swcMinify: true,
-
-  // Performance optimization
-  compress: true,
   poweredByHeader: false,
-
-  // SSL/Security
- reactStrictMode: true,
+  reactStrictMode: true,
 
   // Redirects for old routes
   async redirects() {
