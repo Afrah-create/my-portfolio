@@ -5,9 +5,17 @@
 export const siteConfig = {
   name: "Awongo Fahadi Rashid",
   shortName: "Awongo Rashid",
-  title: "Awongo Fahadi Rashid | Software Engineering Student",
+  title: "Awongo Fahadi Rashid | Software Engineer",
   description:
-    "Portfolio of Awongo Fahadi Rashid — Software Engineering student at Makerere University building full-stack web apps with React, Next.js, and TypeScript.",
+    "Software engineer and full-stack developer portfolio featuring selected projects, technical skills, and professional background.",
+  /** Copy used on the generated Open Graph image */
+  og: {
+    role: "Software Engineer · Full-Stack Developer",
+    tagline:
+      "I design and build dependable web applications with modern JavaScript, React, and Next.js.",
+    affiliation: "Makerere University",
+  },
+  profileImagePath: "profile.jpg",
   /** Resolved base URL for metadataBase, sitemap, and OG absolute URLs */
   url:
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
