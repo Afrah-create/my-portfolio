@@ -36,7 +36,10 @@ const skillVariants = {
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-gray-900 py-12 sm:py-16 md:py-20 lg:py-24">
+    <main
+      id="main-content"
+      className="min-h-screen bg-gray-900 py-12 sm:py-16 md:py-20 lg:py-24"
+    >
       <Container>
         <motion.div
           initial={{ opacity: 0, y: -20 }}
