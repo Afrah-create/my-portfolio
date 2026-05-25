@@ -1,12 +1,14 @@
-import { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/layout/Container";
 import ProjectsGrid from "@/components/projects/ProjectsGrid";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Projects | Portfolio",
-  description: "Explore my portfolio of web development projects",
-};
+export const metadata = createPageMetadata({
+  title: "Projects",
+  description:
+    "Explore web development projects by Awongo Fahadi Rashid — e-commerce, school portals, Next.js apps, and full-stack builds.",
+  path: "/projects",
+});
 
 export default function ProjectsPage() {
   return (

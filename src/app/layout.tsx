@@ -3,16 +3,14 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { defaultMetadata } from "@/lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
 
-export const metadata: Metadata = {
-  title: "Portfolio | Full Stack Developer",
-  description: "Personal portfolio showcasing web development projects and skills",
-};
+export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
   children,

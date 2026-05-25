@@ -1,5 +1,7 @@
-export const SITE_NAME = "Your Name";
-export const SITE_DESCRIPTION = "Full Stack Developer & Designer";
+import { siteConfig } from "@/lib/site";
+
+export const SITE_NAME = siteConfig.name;
+export const SITE_DESCRIPTION = siteConfig.description;
 
 export const NAVIGATION_LINKS = [
   { name: "Home", href: "/" },
