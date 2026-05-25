@@ -147,25 +147,35 @@ export default function ProjectsGrid() {
         ))}
       </div>
 
-      <motion.div
-        layout={!shouldReduceMotion}
-        className="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
-      >
-        <AnimatePresence mode="popLayout">
+      {shouldReduceMotion ? (
+        <div className="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {filteredProjects.map((project) => (
-            <motion.div
-              key={project.id}
-              layout={!shouldReduceMotion}
-              initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.96 }}
-              animate={shouldReduceMotion ? false : { opacity: 1, scale: 1 }}
-              exit={shouldReduceMotion ? false : { opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.25 }}
-            >
+            <div key={project.id}>
               <ProjectGridCard project={project} />
-            </motion.div>
+            </div>
           ))}
-        </AnimatePresence>
-      </motion.div>
+        </div>
+      ) : (
+        <motion.div
+          layout
+          className="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.25 }}
+              >
+                <ProjectGridCard project={project} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      )}
     </>
   );
 }
