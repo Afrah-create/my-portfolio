@@ -16,7 +16,7 @@ export const siteConfig = {
       "I design and build dependable web applications with modern JavaScript, React, and Next.js.",
     affiliation: "Makerere University",
   },
-  profileImagePath: "profile.jpg",
+  profileImagePath: "profile.jpeg",
   /** Resolved base URL for metadataBase, sitemap, and OG absolute URLs */
   url:
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
