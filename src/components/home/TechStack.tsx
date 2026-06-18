@@ -1,247 +1,232 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import Container from "@/components/layout/Container";
-import SectionTitle from "@/components/ui/SectionTitle";
+import SectionHeader from "@/components/ui/SectionHeader";
+
+type CategoryTheme = {
+  label: string;
+  border: string;
+  rowBg: string;
+  accentBar: string;
+  pillBorder: string;
+  pillBg: string;
+  pillText: string;
+  dot: string;
+  duration: string;
+};
 
 const techCategories = [
   {
     category: "Languages",
     technologies: ["JavaScript", "TypeScript", "Python", "SQL"],
-    colors: {
-      text: "text-sky-300",
-      border: "border-sky-400/40",
-      bg: "bg-sky-500/10",
-      glow: "bg-sky-500/20",
+    theme: {
+      label: "text-sky-400",
+      border: "border-sky-900/50",
+      rowBg: "bg-sky-950/20",
+      accentBar: "bg-sky-400",
+      pillBorder: "border-sky-800/45",
+      pillBg: "bg-sky-950/35",
+      pillText: "text-sky-200",
       dot: "bg-sky-400",
+      duration: "16s",
     },
   },
   {
     category: "Frameworks",
     technologies: ["React", "Next.js", "Node.js", "Express"],
-    colors: {
-      text: "text-violet-300",
-      border: "border-violet-400/40",
-      bg: "bg-violet-500/10",
-      glow: "bg-violet-500/20",
+    theme: {
+      label: "text-violet-400",
+      border: "border-violet-900/50",
+      rowBg: "bg-violet-950/20",
+      accentBar: "bg-violet-400",
+      pillBorder: "border-violet-800/45",
+      pillBg: "bg-violet-950/35",
+      pillText: "text-violet-200",
       dot: "bg-violet-400",
+      duration: "22s",
     },
   },
   {
     category: "Styling",
     technologies: ["Tailwind CSS", "CSS3", "Responsive Design"],
-    colors: {
-      text: "text-emerald-300",
-      border: "border-emerald-400/40",
-      bg: "bg-emerald-500/10",
-      glow: "bg-emerald-500/20",
+    theme: {
+      label: "text-emerald-400",
+      border: "border-emerald-900/50",
+      rowBg: "bg-emerald-950/20",
+      accentBar: "bg-emerald-400",
+      pillBorder: "border-emerald-800/45",
+      pillBg: "bg-emerald-950/35",
+      pillText: "text-emerald-200",
       dot: "bg-emerald-400",
+      duration: "13s",
     },
   },
   {
     category: "Databases",
     technologies: ["PostgreSQL", "MongoDB", "Firebase"],
-    colors: {
-      text: "text-amber-300",
-      border: "border-amber-400/40",
-      bg: "bg-amber-500/10",
-      glow: "bg-amber-500/20",
+    theme: {
+      label: "text-amber-400",
+      border: "border-amber-900/50",
+      rowBg: "bg-amber-950/20",
+      accentBar: "bg-amber-400",
+      pillBorder: "border-amber-800/45",
+      pillBg: "bg-amber-950/35",
+      pillText: "text-amber-200",
       dot: "bg-amber-400",
+      duration: "19s",
     },
   },
   {
     category: "Tools & DevOps",
     technologies: ["Git", "Docker", "GitHub", "VS Code"],
-    colors: {
-      text: "text-slate-300",
-      border: "border-slate-400/40",
-      bg: "bg-slate-500/10",
-      glow: "bg-slate-500/20",
-      dot: "bg-slate-400",
+    theme: {
+      label: "text-rose-400",
+      border: "border-rose-900/50",
+      rowBg: "bg-rose-950/20",
+      accentBar: "bg-rose-400",
+      pillBorder: "border-rose-800/45",
+      pillBg: "bg-rose-950/35",
+      pillText: "text-rose-200",
+      dot: "bg-rose-400",
+      duration: "15s",
     },
   },
-];
+] as const;
 
-// Flatten all technologies for the ticker
-const allTechs = techCategories.flatMap((cat) =>
-  cat.technologies.map((tech) => ({ tech, colors: cat.colors }))
+const allTechs = techCategories.flatMap((cat) => cat.technologies);
+const duplicatedTechs = [...allTechs, ...allTechs];
+
+const themeByTech = new Map(
+  techCategories.flatMap((cat) =>
+    cat.technologies.map((tech) => [tech, cat.theme] as const)
+  )
 );
 
-// Duplicate multiple times for seamless loop
-const duplicatedTechs = [...allTechs, ...allTechs, ...allTechs];
+function TechPill({
+  tech,
+  theme,
+}: {
+  tech: string;
+  theme: CategoryTheme;
+}) {
+  return (
+    <span
+      className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium ${theme.pillBorder} ${theme.pillBg} ${theme.pillText}`}
+    >
+      <span className={`h-1.5 w-1.5 rounded-full ${theme.dot}`} aria-hidden />
+      {tech}
+    </span>
+  );
+}
+
+function CategoryRow({
+  group,
+  animated,
+}: {
+  group: (typeof techCategories)[number];
+  animated: boolean;
+}) {
+  const { theme } = group;
+  const duplicated = [...group.technologies, ...group.technologies];
+
+  return (
+    <div
+      className={`category-row group/row relative overflow-hidden rounded-lg border ${theme.border} ${theme.rowBg}`}
+    >
+      <span
+        className={`absolute inset-y-0 left-0 w-0.5 ${theme.accentBar}`}
+        aria-hidden
+      />
+
+      <div className="flex items-center gap-3 py-2 pl-3 pr-0 sm:gap-4 sm:py-2.5 sm:pl-4">
+        <span
+          className={`w-[5.25rem] shrink-0 font-mono text-[10px] font-semibold uppercase leading-tight tracking-wider sm:w-[6.5rem] sm:text-[11px] ${theme.label}`}
+        >
+          {group.category}
+        </span>
+
+        <div className="relative min-w-0 flex-1 overflow-hidden">
+          {animated ? (
+            <div
+              className="marquee-track-reverse flex w-max gap-2 py-0.5 sm:gap-2.5"
+              style={{ animationDuration: theme.duration }}
+            >
+              {duplicated.map((tech, index) => (
+                <TechPill
+                  key={`${tech}-${index}`}
+                  tech={tech}
+                  theme={theme}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-wrap gap-2 py-0.5">
+              {group.technologies.map((tech) => (
+                <TechPill key={tech} tech={tech} theme={theme} />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function TechStack() {
-  return (
-    <section className="py-12 sm:py-16 md:py-20 bg-gray-900 overflow-hidden relative">
-      {/* Softer gradient overlay - only at far edges */}
-      <div className="absolute inset-y-0 left-0 w-16 sm:w-24 md:w-32 bg-linear-to-r from-gray-900 to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-16 sm:w-24 md:w-32 bg-linear-to-l from-gray-900 to-transparent z-10 pointer-events-none" />
-      
-      <Container>
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
-          <SectionTitle subtitle="Technologies I work with">
-            <span className="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Tech Stack
-            </span>
-          </SectionTitle>
-        </motion.div>
+  const shouldReduceMotion = useReducedMotion();
 
-        {/* Continuous scrolling ticker - with padding for mobile */}
-        <div className="relative mt-8 sm:mt-12 md:mt-16 mb-8 sm:mb-12">
-          <div className="overflow-hidden px-4 sm:px-0">
-            <motion.div
-              className="flex gap-4 sm:gap-6 md:gap-8"
-              animate={{
-                x: [0, -50 * allTechs.length],
-              }}
-              transition={{
-                x: {
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  duration: 40, // Slower for better readability
-                  ease: "linear",
-                },
-              }}
-            >
-              {duplicatedTechs.map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="shrink-0"
-                  animate={{
-                    opacity: [0.6, 1, 0.6],
-                    scale: [0.96, 1, 0.96],
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 3,
-                    delay: index * 0.1,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <div
-                    className={`px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg border-2 ${item.colors.border} ${item.colors.bg} relative group transition-all duration-300`}
-                  >
-                    {/* Neon glow effect */}
-                    <div
-                      className={`absolute inset-0 rounded-lg ${item.colors.glow} opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500`}
-                    />
-                    
-                    <motion.span
-                      className={`relative z-10 font-semibold text-sm sm:text-base md:text-lg ${item.colors.text} whitespace-nowrap`}
-                      animate={{
-                        filter: [
-                          "drop-shadow(0 0 2px rgba(255,255,255,0.5))",
-                          "drop-shadow(0 0 8px rgba(255,255,255,0.8))",
-                          "drop-shadow(0 0 2px rgba(255,255,255,0.5))",
-                        ],
-                      }}
-                      transition={{
-                        repeat: Infinity,
-                        duration: 2,
-                        delay: index * 0.15,
-                      }}
-                    >
-                      {item.tech}
-                    </motion.span>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+  return (
+    <section className="section-divider overflow-hidden py-20">
+      <Container>
+        <SectionHeader
+          label="04 — Stack"
+          title="Tech Stack"
+          subtitle="Technologies I work with"
+        />
+
+        {/* Top ticker — all techs, right to left, faster */}
+        <div className="relative mb-8">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-linear-to-r from-[var(--color-bg)] to-transparent sm:w-20" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-linear-to-l from-[var(--color-bg)] to-transparent sm:w-20" />
+
+          <div className="overflow-hidden">
+            {shouldReduceMotion ? (
+              <div className="flex flex-wrap justify-center gap-2">
+                {techCategories.flatMap((cat) =>
+                  cat.technologies.map((tech) => (
+                    <TechPill key={tech} tech={tech} theme={cat.theme} />
+                  ))
+                )}
+              </div>
+            ) : (
+              <div
+                className="marquee-track flex w-max gap-2.5 sm:gap-3"
+                style={{ animationDuration: "20s" }}
+              >
+                {duplicatedTechs.map((tech, index) => (
+                  <TechPill
+                    key={`${tech}-${index}`}
+                    tech={tech}
+                    theme={themeByTech.get(tech) ?? techCategories[0].theme}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Category breakdown with pulsing effect - Responsive grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 max-w-6xl mx-auto mt-12 sm:mt-16 px-4 sm:px-0">
-          {techCategories.map((group, groupIndex) => (
-            <motion.div
+        {/* Grouped rows — each line scrolls at its own pace & color */}
+        <div className="mx-auto flex max-w-4xl flex-col gap-2 sm:gap-2.5">
+          {techCategories.map((group) => (
+            <CategoryRow
               key={group.category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: groupIndex * 0.1, duration: 0.5 }}
-              className="relative"
-            >
-              <div className="group bg-gray-800/30 backdrop-blur-sm rounded-lg p-4 sm:p-5 border border-gray-700/50 hover:border-gray-600/50 transition-colors duration-300">
-                <h3
-                  className={`text-xs sm:text-sm font-bold mb-3 sm:mb-4 uppercase tracking-wide ${group.colors.text}`}
-                >
-                  {group.category}
-                </h3>
-                <ul className="space-y-2 sm:space-y-3">
-                  {group.technologies.map((tech, techIndex) => (
-                    <motion.li
-                      key={tech}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: techIndex * 0.1 }}
-                      className="relative"
-                    >
-                      <motion.div
-                        className="flex items-center gap-2 sm:gap-3 cursor-pointer"
-                        whileHover={{ x: 4 }}
-                        animate={{
-                          opacity: [0.7, 1, 0.7],
-                        }}
-                        transition={{
-                          opacity: {
-                            repeat: Infinity,
-                            duration: 3,
-                            delay: techIndex * 0.3,
-                          },
-                        }}
-                      >
-                        {/* Pulsing dot */}
-                        <motion.span
-                          className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${group.colors.dot} shrink-0`}
-                          animate={{
-                            scale: [1, 1.3, 1],
-                            boxShadow: [
-                              "0 0 4px rgba(255,255,255,0.3)",
-                              "0 0 12px rgba(255,255,255,0.8)",
-                              "0 0 4px rgba(255,255,255,0.3)",
-                            ],
-                          }}
-                          transition={{
-                            repeat: Infinity,
-                            duration: 2,
-                            delay: techIndex * 0.2,
-                          }}
-                        />
-                        <span className="text-gray-300 text-xs sm:text-sm font-medium">
-                          {tech}
-                        </span>
-                      </motion.div>
-                    </motion.li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
+              group={group}
+              animated={!shouldReduceMotion}
+            />
           ))}
         </div>
       </Container>
-
-      {/* Ambient background glow - more subtle */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-2xl sm:max-w-3xl md:max-w-4xl opacity-40 sm:opacity-50">
-        <motion.div
-          className="w-full h-full bg-linear-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 8,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
     </section>
   );
 }

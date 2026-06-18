@@ -7,16 +7,59 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { projects } from "@/data/projects";
 import { Project } from "@/types/project";
 import { Card } from "@/components/ui/Card";
+import { springTransition } from "@/lib/motion";
 
 const allTechTags = Array.from(
   new Set(projects.flatMap((project) => project.techStack))
 ).sort();
 
+const featuredProject = projects[0];
+
+function FilterPill({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  const shouldReduceMotion = useReducedMotion();
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`relative rounded-full px-4 py-2 text-sm transition-colors focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] ${
+        active
+          ? "font-medium text-gray-950"
+          : "border border-[var(--color-surface-2)] bg-[var(--color-surface)] text-slate-400 hover:border-cyan-700"
+      }`}
+    >
+      {active && !shouldReduceMotion && (
+        <motion.span
+          layoutId="project-filter-pill"
+          className="absolute inset-0 rounded-full bg-cyan-500"
+          transition={springTransition}
+          aria-hidden
+        />
+      )}
+      {active && shouldReduceMotion && (
+        <span
+          className="absolute inset-0 rounded-full bg-cyan-500"
+          aria-hidden
+        />
+      )}
+      <span className="relative z-10">{children}</span>
+    </button>
+  );
+}
+
 function ProjectGridCard({ project }: { project: Project }) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <Card glowOnHover className="flex h-full flex-col overflow-hidden p-0">
+    <Card glowOnHover className="group flex h-full flex-col overflow-hidden p-0">
       {project.image &&
         (shouldReduceMotion ? (
           <div className="relative h-44 overflow-hidden rounded-t-[var(--radius-card)]">
@@ -29,19 +72,26 @@ function ProjectGridCard({ project }: { project: Project }) {
             />
           </div>
         ) : (
-          <motion.div
-            className="relative h-44 overflow-hidden rounded-t-[var(--radius-card)]"
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Image
-              src={project.image}
-              alt={`${project.title} preview`}
-              width={800}
-              height={500}
-              className="h-44 w-full object-cover"
-            />
-          </motion.div>
+          <div className="relative h-44 overflow-hidden rounded-t-[var(--radius-card)]">
+            <motion.div
+              className="h-full w-full"
+              whileHover={{ scale: 1.04 }}
+              transition={{ duration: 0.25 }}
+            >
+              <Image
+                src={project.image}
+                alt={`${project.title} preview`}
+                width={800}
+                height={500}
+                className="h-44 w-full object-cover"
+              />
+            </motion.div>
+            <div className="pointer-events-none absolute inset-0 flex items-end bg-slate-950/0 p-4 transition-colors duration-300 group-hover:bg-slate-950/70">
+              <span className="translate-y-2 text-sm font-medium text-cyan-400 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                View project →
+              </span>
+            </div>
+          </div>
         ))}
 
       <div className="flex flex-1 flex-col p-6">
@@ -56,7 +106,9 @@ function ProjectGridCard({ project }: { project: Project }) {
           ))}
         </div>
 
-        <h3 className="mb-2 font-semibold text-slate-100">{project.title}</h3>
+        <h3 className="mb-2 font-display font-semibold text-slate-100">
+          {project.title}
+        </h3>
         <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-slate-400">
           {project.description}
         </p>
@@ -108,47 +160,113 @@ function ProjectGridCard({ project }: { project: Project }) {
   );
 }
 
+function FeaturedProject({ project }: { project: Project }) {
+  const shouldReduceMotion = useReducedMotion();
+
+  return (
+    <Card glowOnHover className="group mb-12 overflow-hidden p-0 lg:mb-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        {project.image && (
+          <div className="relative h-56 overflow-hidden lg:h-auto lg:min-h-[320px]">
+            {shouldReduceMotion ? (
+              <Image
+                src={project.image}
+                alt={`${project.title} preview`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            ) : (
+              <motion.div className="h-full w-full" whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
+                <Image
+                  src={project.image}
+                  alt={`${project.title} preview`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </motion.div>
+            )}
+            <span className="absolute left-4 top-4 rounded-full border border-cyan-500/40 bg-cyan-500/10 px-3 py-1 font-mono text-xs text-cyan-400">
+              Featured
+            </span>
+          </div>
+        )}
+
+        <div className="flex flex-col justify-center p-8 lg:p-10">
+          <div className="mb-4 flex flex-wrap gap-1.5">
+            {project.techStack.map((tech) => (
+              <span
+                key={tech}
+                className="rounded-full border border-cyan-800 bg-cyan-950 px-2.5 py-0.5 text-xs text-cyan-400"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+          <h2 className="font-display mb-3 text-2xl font-bold text-slate-50 lg:text-3xl">
+            {project.title}
+          </h2>
+          <p className="mb-6 leading-relaxed text-slate-400">
+            {project.description}
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Link
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-xl bg-cyan-500 px-5 py-2.5 text-sm font-semibold text-gray-950 transition-colors hover:bg-cyan-400"
+            >
+              View Live Demo
+            </Link>
+            {project.github && (
+              <Link
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center rounded-xl border border-slate-600 px-5 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:border-cyan-500 hover:text-cyan-400"
+              >
+                GitHub
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
 export default function ProjectsGrid() {
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
   const filteredProjects = useMemo(() => {
-    if (!activeTag) return projects;
-    return projects.filter((project) => project.techStack.includes(activeTag));
+    const rest = projects.slice(1);
+    if (!activeTag) return rest;
+    return rest.filter((project) => project.techStack.includes(activeTag));
   }, [activeTag]);
 
   return (
     <>
-      <div className="relative z-10 mb-10 flex flex-wrap justify-center gap-2">
-        <button
-          type="button"
-          onClick={() => setActiveTag(null)}
-          className={`rounded-full px-4 py-2 text-sm transition-colors focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] ${
-            activeTag === null
-              ? "bg-cyan-500 font-medium text-gray-950"
-              : "border border-[var(--color-surface-2)] bg-[var(--color-surface)] text-slate-400 hover:border-cyan-700"
-          }`}
-        >
+      {!activeTag && <FeaturedProject project={featuredProject} />}
+
+      <div className="mb-10 flex flex-wrap justify-center gap-2">
+        <FilterPill active={activeTag === null} onClick={() => setActiveTag(null)}>
           All
-        </button>
+        </FilterPill>
         {allTechTags.map((tag) => (
-          <button
+          <FilterPill
             key={tag}
-            type="button"
+            active={activeTag === tag}
             onClick={() => setActiveTag(tag)}
-            className={`rounded-full px-4 py-2 text-sm transition-colors focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] ${
-              activeTag === tag
-                ? "bg-cyan-500 font-medium text-gray-950"
-                : "border border-[var(--color-surface-2)] bg-[var(--color-surface)] text-slate-400 hover:border-cyan-700"
-            }`}
           >
             {tag}
-          </button>
+          </FilterPill>
         ))}
       </div>
 
       {shouldReduceMotion ? (
-        <div className="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {filteredProjects.map((project) => (
             <div key={project.id}>
               <ProjectGridCard project={project} />
@@ -158,7 +276,7 @@ export default function ProjectsGrid() {
       ) : (
         <motion.div
           layout
-          className="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (

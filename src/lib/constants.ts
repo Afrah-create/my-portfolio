@@ -3,17 +3,23 @@ import { siteConfig } from "@/lib/site";
 export const SITE_NAME = siteConfig.name;
 export const SITE_DESCRIPTION = siteConfig.description;
 
+export const CONTACT = {
+  email: "fahadirashidawongo@gmail.com",
+  github: "https://github.com/Afrah-create",
+  whatsapp: "https://wa.me/256764922070",
+  whatsappDisplay: "0764922070",
+} as const;
+
 export const NAVIGATION_LINKS = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Projects", href: "/projects" },
-  { name: "Contact", href: "/contact" },
 ];
 
 export const SOCIAL_LINKS = [
-  { name: "GitHub", href: "https://github.com/yourusername" },
-  { name: "LinkedIn", href: "https://linkedin.com/in/yourusername" },
-  { name: "Twitter", href: "https://twitter.com/yourusername" },
+  { name: "GitHub", href: CONTACT.github },
+  { name: "WhatsApp", href: CONTACT.whatsapp },
+  { name: "Email", href: `mailto:${CONTACT.email}` },
 ];
 
 export const SKILLS = [

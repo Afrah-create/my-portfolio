@@ -3,7 +3,7 @@ import AboutPreview from "@/components/home/AboutPreview";
 import WhatIDo from "@/components/home/WhatIDo";
 import ProjectsPreview from "@/components/home/ProjectsPreview";
 import TechStack from "@/components/home/TechStack";
-import ContactCTA from "@/components/home/ContactCTA";
+import Contact from "@/components/home/Contact";
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       <WhatIDo />
       <ProjectsPreview />
       <TechStack />
-      <ContactCTA />
+      <Contact />
     </main>
   );
 }

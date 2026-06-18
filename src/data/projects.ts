@@ -2,6 +2,35 @@ import { Project } from "@/types/project";
 
 export const projects: Project[] = [
   {
+    id: "11",
+    title: "MAMSA Online Voting",
+    description:
+      "An online voting platform for the Madi' Makerere Students Association — student registration, secure ballot casting, one vote per student, and automated results publishing when elections close.",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+    link: "https://e-vote-mamsa.vercel.app/",
+    image: "/projects/vote.png",
+  },
+  {
+    id: "9",
+    title: "Drate Health",
+    description:
+      "A maternal and family health NGO website delivering evidence-based health education through videos, blog articles, courses, downloadable resources, and donation support for mothers and caregivers across Africa.",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+    link: "https://drate-health-website.vercel.app/",
+    image: "/projects/drate.png",
+
+  },
+  {
+    id: "10",
+    title: "School Management System",
+    description:
+      "A web-based school management platform with secure authentication and role-based workflows for administrators, teachers, and staff to manage school operations online.",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+    link: "https://school-management-systme-web.vercel.app/login",
+    image: "/projects/school.JPG",
+
+  },
+  {
     id: "1",
     title: "E-Commerce Platform",
     description: "A full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment processing.",

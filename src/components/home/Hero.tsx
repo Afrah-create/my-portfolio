@@ -1,26 +1,110 @@
 "use client";
 
-import { ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { ReactNode, useEffect, useState } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/layout/Container";
+import { fadeUp } from "@/lib/motion";
 
 const fullName = "Awongo Fahadi Rashid";
 const [accentWord, ...nameRestParts] = fullName.split(" ");
 const restOfName = nameRestParts.join(" ");
 
-const fadeUp = (delay: number, duration = 0.5) => ({
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration, delay, ease: "easeOut" as const },
-  },
-});
+const roles = [
+  "Software Engineering Student at Makerere University",
+  "Full-Stack Developer",
+  "Problem Solver",
+];
+
+function RotatingRole({ shouldReduceMotion }: { shouldReduceMotion: boolean }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % roles.length);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, [shouldReduceMotion]);
+
+  if (shouldReduceMotion) {
+    return (
+      <p className="text-lg font-normal text-slate-400 lg:text-xl">{roles[0]}</p>
+    );
+  }
+
+  return (
+    <div className="relative h-8 overflow-hidden lg:h-9">
+      <AnimatePresence mode="wait">
+        <motion.p
+          key={roles[index]}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -14 }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+          className="text-lg font-normal text-slate-400 lg:text-xl"
+        >
+          {roles[index]}
+        </motion.p>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function ScrollCue() {
+  return (
+    <motion.div
+      className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.2, duration: 0.5 }}
+      aria-hidden
+    >
+      <span className="font-mono text-[10px] uppercase tracking-widest text-slate-600">
+        Scroll
+      </span>
+      <motion.svg
+        className="h-5 w-5 text-cyan-400/70"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2}
+        animate={{ y: [0, 6, 0] }}
+        transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M19 9l-7 7-7-7"
+        />
+      </motion.svg>
+    </motion.div>
+  );
+}
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 120, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 120, damping: 20 });
+  const imageX = useTransform(springX, [-0.5, 0.5], [-10, 10]);
+  const imageY = useTransform(springY, [-0.5, 0.5], [-8, 8]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (shouldReduceMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
 
   const nameMotion = fadeUp(0);
   const roleMotion = fadeUp(0.15);
@@ -28,27 +112,27 @@ export default function Hero() {
   const imageMotion = fadeUp(0.2, 0.6);
 
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden bg-gray-950 py-24 lg:py-32">
+    <section
+      className="dot-grid relative flex min-h-screen items-center overflow-hidden bg-gray-950 py-24 lg:py-32"
+      onMouseMove={handleMouseMove}
+    >
       <Container>
         <div className="relative z-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_0.62fr] lg:gap-16">
-          {/* Text column */}
           <div className="order-2 flex flex-col gap-6 text-center lg:order-1 lg:text-left">
             {shouldReduceMotion ? (
               <>
                 <div className="mx-auto mb-6 h-[3px] w-10 rounded-full bg-cyan-400 lg:mx-0" />
-                <h1 className="text-5xl font-black tracking-tight text-slate-50 lg:text-6xl">
+                <h1 className="font-display text-5xl font-black tracking-tight text-slate-50 lg:text-6xl">
                   <span className="text-cyan-400">{accentWord}</span> {restOfName}
                 </h1>
-                <p className="text-lg font-normal text-slate-400 lg:text-xl">
-                  Software Engineering Student at Makerere University
-                </p>
+                <RotatingRole shouldReduceMotion />
                 <p className="mx-auto max-w-lg text-base leading-relaxed text-slate-500 lg:mx-0">
                   Building clean, full-stack web experiences with React, Next.js,
                   and modern TypeScript tooling.
                 </p>
                 <div className="mt-2 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
                   <HeroPrimaryButton href="/projects">View Projects</HeroPrimaryButton>
-                  <HeroSecondaryButton href="/contact">Contact Me</HeroSecondaryButton>
+                  <HeroSecondaryButton href="/#contact">Contact Me</HeroSecondaryButton>
                 </div>
               </>
             ) : (
@@ -59,19 +143,19 @@ export default function Hero() {
                   animate="visible"
                 >
                   <div className="mx-auto mb-6 h-[3px] w-10 rounded-full bg-cyan-400 lg:mx-0" />
-                  <h1 className="text-5xl font-black tracking-tight text-slate-50 lg:text-6xl">
-                    <span className="text-cyan-400">{accentWord}</span> {restOfName}
+                  <h1 className="font-display text-5xl font-black tracking-tight text-slate-50 lg:text-6xl">
+                    <span className="text-cyan-400">{accentWord}</span>{" "}
+                    {restOfName}
                   </h1>
                 </motion.div>
 
-                <motion.p
+                <motion.div
                   variants={roleMotion}
                   initial="hidden"
                   animate="visible"
-                  className="text-lg font-normal text-slate-400 lg:text-xl"
                 >
-                  Software Engineering Student at Makerere University
-                </motion.p>
+                  <RotatingRole shouldReduceMotion={false} />
+                </motion.div>
 
                 <motion.p
                   variants={bodyMotion}
@@ -90,13 +174,12 @@ export default function Hero() {
                   className="mt-2 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start"
                 >
                   <HeroPrimaryButton href="/projects">View Projects</HeroPrimaryButton>
-                  <HeroSecondaryButton href="/contact">Contact Me</HeroSecondaryButton>
+                  <HeroSecondaryButton href="/#contact">Contact Me</HeroSecondaryButton>
                 </motion.div>
               </>
             )}
           </div>
 
-          {/* Image column */}
           {shouldReduceMotion ? (
             <div className="order-1 w-full lg:order-2">
               <ProfileImage />
@@ -107,12 +190,14 @@ export default function Hero() {
               initial="hidden"
               animate="visible"
               className="order-1 w-full lg:order-2"
+              style={{ x: imageX, y: imageY }}
             >
               <ProfileImage />
             </motion.div>
           )}
         </div>
       </Container>
+      {!shouldReduceMotion && <ScrollCue />}
     </section>
   );
 }

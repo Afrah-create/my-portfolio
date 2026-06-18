@@ -8,22 +8,10 @@ import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Card } from "@/components/ui/Card";
+import SectionHeader from "@/components/ui/SectionHeader";
+import { staggerContainer, staggerItem } from "@/lib/motion";
 
 const featuredProjects = projects.slice(0, 3);
-
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0 },
-};
 
 function ProjectPreviewCard({ project }: { project: Project }) {
   const shouldReduceMotion = useReducedMotion();
@@ -32,10 +20,10 @@ function ProjectPreviewCard({ project }: { project: Project }) {
     <Card
       href={project.link}
       glowOnHover
-      className="flex h-full flex-col overflow-hidden p-0"
+      className="group flex h-full flex-col overflow-hidden p-0"
     >
-      {project.image && (
-        shouldReduceMotion ? (
+      {project.image &&
+        (shouldReduceMotion ? (
           <div className="relative h-40 overflow-hidden rounded-t-[var(--radius-card)]">
             <Image
               src={project.image}
@@ -46,21 +34,27 @@ function ProjectPreviewCard({ project }: { project: Project }) {
             />
           </div>
         ) : (
-          <motion.div
-            className="relative h-40 overflow-hidden rounded-t-[var(--radius-card)]"
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Image
-              src={project.image}
-              alt={`${project.title} preview`}
-              width={640}
-              height={400}
-              className="h-40 w-full object-cover"
-            />
-          </motion.div>
-        )
-      )}
+          <div className="relative h-40 overflow-hidden rounded-t-[var(--radius-card)]">
+            <motion.div
+              className="h-full w-full"
+              whileHover={{ scale: 1.04 }}
+              transition={{ duration: 0.25 }}
+            >
+              <Image
+                src={project.image}
+                alt={`${project.title} preview`}
+                width={640}
+                height={400}
+                className="h-40 w-full object-cover"
+              />
+            </motion.div>
+            <div className="pointer-events-none absolute inset-0 flex items-end bg-slate-950/0 p-4 transition-colors duration-300 group-hover:bg-slate-950/60">
+              <span className="translate-y-2 text-sm font-medium text-cyan-400 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                View project →
+              </span>
+            </div>
+          </div>
+        ))}
 
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-4 flex flex-wrap gap-1.5">
@@ -74,7 +68,9 @@ function ProjectPreviewCard({ project }: { project: Project }) {
           ))}
         </div>
 
-        <h3 className="mb-2 font-semibold text-slate-100">{project.title}</h3>
+        <h3 className="mb-2 font-display font-semibold text-slate-100">
+          {project.title}
+        </h3>
         <p className="mb-4 line-clamp-2 text-sm text-slate-400">
           {project.description}
         </p>
@@ -89,17 +85,14 @@ export default function ProjectsPreview() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="py-20">
+    <section className="section-divider section-surface py-20">
       <Container>
         <AnimatedSection>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-2xl font-semibold text-slate-100">
-              Featured Projects
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-slate-400">
-              Check out my recent work
-            </p>
-          </div>
+          <SectionHeader
+            label="03 — Work"
+            title="Featured Projects"
+            subtitle="Check out my recent work"
+          />
 
           {shouldReduceMotion ? (
             <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -110,13 +103,13 @@ export default function ProjectsPreview() {
           ) : (
             <motion.div
               className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
-              variants={containerVariants}
+              variants={staggerContainer()}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-80px" }}
             >
               {featuredProjects.map((project) => (
-                <motion.div key={project.id} variants={itemVariants}>
+                <motion.div key={project.id} variants={staggerItem}>
                   <ProjectPreviewCard project={project} />
                 </motion.div>
               ))}

@@ -5,7 +5,7 @@ interface ButtonProps {
   children: ReactNode;
   onClick?: () => void;
   href?: string;
-  variant?: "primary" | "secondary" | "neon";
+  variant?: "primary" | "secondary" | "ghost";
   className?: string;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
@@ -21,15 +21,15 @@ export default function Button({
   disabled = false,
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]";
+    "inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]";
 
   const variantStyles = {
     primary:
-      "bg-gray-900 text-white hover:bg-gray-800 disabled:opacity-70 disabled:cursor-not-allowed",
+      "bg-cyan-500 text-gray-950 hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-70",
     secondary:
-      "border-2 border-gray-900 bg-white text-gray-900 hover:bg-gray-50 disabled:opacity-70 disabled:cursor-not-allowed",
-    neon:
-      "border-2 border-cyan-400 bg-transparent text-cyan-400 hover:bg-cyan-400 hover:text-gray-900 hover:shadow-[0_0_20px_rgba(34,211,238,0.6)] disabled:opacity-70 disabled:cursor-not-allowed",
+      "border border-slate-600 text-slate-300 hover:border-cyan-500 hover:text-cyan-400 disabled:cursor-not-allowed disabled:opacity-70",
+    ghost:
+      "border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 hover:border-cyan-400/50 hover:bg-cyan-500/20 disabled:cursor-not-allowed disabled:opacity-70",
   };
 
   const buttonClasses = `${baseStyles} ${variantStyles[variant]} ${className}`;

@@ -4,6 +4,8 @@ import { motion, useReducedMotion } from "framer-motion";
 import Container from "@/components/layout/Container";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Card } from "@/components/ui/Card";
+import SectionHeader from "@/components/ui/SectionHeader";
+import { staggerContainer, staggerItem } from "@/lib/motion";
 
 const services = [
   {
@@ -26,20 +28,6 @@ const services = [
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function WhatIDo() {
   const shouldReduceMotion = useReducedMotion();
 
@@ -47,23 +35,20 @@ export default function WhatIDo() {
     <section className="py-20">
       <Container>
         <AnimatedSection>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-2xl font-semibold text-slate-100">
-              What I Do
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-slate-400">
-              Expertise and capabilities
-            </p>
-          </div>
+          <SectionHeader
+            label="02 — Services"
+            title="What I Do"
+            subtitle="Expertise and capabilities"
+          />
 
           {shouldReduceMotion ? (
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
               {services.map((service) => (
-                <Card key={service.title} glowOnHover>
-                  <span className="mb-4 block text-2xl text-cyan-400" aria-hidden>
+                <Card key={service.title} glowOnHover className="h-full">
+                  <span className="mb-4 block font-mono text-2xl text-cyan-400" aria-hidden>
                     {service.icon}
                   </span>
-                  <h3 className="mb-3 font-medium text-slate-100">
+                  <h3 className="mb-3 font-display font-semibold text-slate-100">
                     {service.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-400">
@@ -75,21 +60,21 @@ export default function WhatIDo() {
           ) : (
             <motion.div
               className="grid grid-cols-1 gap-8 md:grid-cols-3"
-              variants={containerVariants}
+              variants={staggerContainer()}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-80px" }}
             >
               {services.map((service) => (
-                <motion.div key={service.title} variants={itemVariants}>
+                <motion.div key={service.title} variants={staggerItem}>
                   <Card glowOnHover className="h-full">
                     <span
-                      className="mb-4 block text-2xl text-cyan-400"
+                      className="mb-4 block font-mono text-2xl text-cyan-400"
                       aria-hidden
                     >
                       {service.icon}
                     </span>
-                    <h3 className="mb-3 font-medium text-slate-100">
+                    <h3 className="mb-3 font-display font-semibold text-slate-100">
                       {service.title}
                     </h3>
                     <p className="text-sm leading-relaxed text-slate-400">
