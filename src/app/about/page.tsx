@@ -43,6 +43,7 @@ export default function AboutPage() {
             </>
           }
           subtitle="Learn more about my journey, skills, and what drives me as a developer."
+          align="left"
           className="mb-16 sm:mb-20"
         />
 
@@ -90,6 +91,16 @@ export default function AboutPage() {
                 Who I am
               </motion.h2>
 
+              <blockquote className="mb-6 border-l-2 border-cyan-500/40 pl-4">
+                <motion.p
+                  variants={staggerItem}
+                  className="font-display text-lg font-medium leading-snug text-slate-300 sm:text-xl"
+                >
+                  I build web applications that solve real problems — from
+                  voting platforms to health education sites.
+                </motion.p>
+              </blockquote>
+
               <div className="space-y-5 text-slate-400 leading-relaxed">
                 {[
                   "I'm a passionate software engineering student at Makerere University with a deep love for creating beautiful, functional web applications. My journey into web development started several years ago, and I've been hooked ever since.",
@@ -117,7 +128,7 @@ export default function AboutPage() {
             transition={{ duration: 0.5 }}
             className="section-divider mb-16 pt-16 sm:mb-20 sm:pt-20"
           >
-            <h2 className="font-display mb-8 text-center text-2xl font-bold text-slate-50 sm:text-3xl">
+            <h2 className="font-display mb-8 text-left text-2xl font-bold text-slate-50 sm:text-3xl">
               Skills & Technologies
             </h2>
 
@@ -151,7 +162,7 @@ export default function AboutPage() {
             transition={{ duration: 0.5 }}
             className="section-divider pt-16 sm:pt-20"
           >
-            <h2 className="font-display mb-10 text-center text-2xl font-bold text-slate-50 sm:text-3xl">
+            <h2 className="font-display mb-10 text-left text-2xl font-bold text-slate-50 sm:text-3xl">
               Education & Journey
             </h2>
 

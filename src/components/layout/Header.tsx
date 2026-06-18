@@ -6,9 +6,36 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { NAVIGATION_LINKS } from "@/lib/constants";
 import { springTransition } from "@/lib/motion";
+import { siteConfig } from "@/lib/site";
 import Container from "./Container";
 import MenuButton from "./MenuButton";
 import MobileNav from "./MobileNav";
+
+function HeaderBrand() {
+  const [firstName, ...rest] = siteConfig.name.split(" ");
+  const restOfName = rest.join(" ");
+
+  return (
+    <Link
+      href="/"
+      aria-label={`${siteConfig.name} — Home`}
+      className="group shrink-0 transition-opacity hover:opacity-90"
+    >
+      {/* Initials — mobile & tablet */}
+      <span
+        className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-cyan-500/25 bg-cyan-500/10 font-display text-sm font-bold tracking-wide text-cyan-400 transition-colors group-hover:border-cyan-500/40 group-hover:bg-cyan-500/15 lg:hidden"
+        aria-hidden
+      >
+        {siteConfig.initials}
+      </span>
+
+      {/* Full name — large screens */}
+      <span className="hidden font-display text-lg font-bold leading-tight tracking-tight text-slate-100 lg:inline xl:text-xl">
+        <span className="text-cyan-400">{firstName}</span> {restOfName}
+      </span>
+    </Link>
+  );
+}
 
 export default function Header() {
   const pathname = usePathname();
@@ -77,13 +104,8 @@ export default function Header() {
           }}
         >
           <Container>
-            <nav className="flex items-center justify-between py-4">
-              <Link
-                href="/"
-                className="font-display text-xl font-bold text-cyan-400 transition-opacity hover:opacity-90"
-              >
-                AFR
-              </Link>
+            <nav className="flex items-center justify-between gap-4 py-4">
+              <HeaderBrand />
               {navLinks}
               <MenuButton
                 open={mobileMenuOpen}
@@ -114,15 +136,10 @@ export default function Header() {
       >
         <Container>
           <motion.nav
-            className="flex items-center justify-between"
+            className="flex items-center justify-between gap-4"
             style={{ paddingTop: headerPadding, paddingBottom: headerPadding }}
           >
-            <Link
-              href="/"
-              className="font-display text-xl font-bold text-cyan-400 transition-opacity hover:opacity-90"
-            >
-              AFR
-            </Link>
+            <HeaderBrand />
             {navLinks}
             <MenuButton
               open={mobileMenuOpen}

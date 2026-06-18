@@ -1,8 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { projects } from "@/data/projects";
+import {
+  homeSecondaryProjects,
+  homeSpotlightProject,
+} from "@/data/projects";
 import { Project } from "@/types/project";
 import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
@@ -11,9 +15,75 @@ import { Card } from "@/components/ui/Card";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 
-const featuredProjects = projects.slice(0, 3);
+function SpotlightProject({ project }: { project: Project }) {
+  const shouldReduceMotion = useReducedMotion();
 
-function ProjectPreviewCard({ project }: { project: Project }) {
+  return (
+    <Card glowOnHover className="group overflow-hidden p-0">
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        {project.image && (
+          <div className="relative h-56 overflow-hidden lg:h-auto lg:min-h-[320px]">
+            {shouldReduceMotion ? (
+              <Image
+                src={project.image}
+                alt={`${project.title} preview`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            ) : (
+              <motion.div
+                className="h-full w-full"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Image
+                  src={project.image}
+                  alt={`${project.title} preview`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </motion.div>
+            )}
+            <span className="absolute left-4 top-4 rounded-full border border-cyan-500/40 bg-cyan-500/10 px-3 py-1 font-mono text-xs text-cyan-400">
+              Spotlight
+            </span>
+          </div>
+        )}
+
+        <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
+          <div className="mb-4 flex flex-wrap gap-1.5">
+            {project.techStack.map((tech) => (
+              <span
+                key={tech}
+                className="rounded-full border border-cyan-800 bg-cyan-950 px-2.5 py-0.5 text-xs text-cyan-400"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+          <h3 className="font-display mb-3 text-2xl font-bold text-slate-50 lg:text-3xl">
+            {project.title}
+          </h3>
+          <p className="mb-6 leading-relaxed text-slate-400">
+            {project.description}
+          </p>
+          <Link
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-fit items-center rounded-xl bg-cyan-500 px-5 py-2.5 text-sm font-semibold text-gray-950 transition-colors hover:bg-cyan-400"
+          >
+            View live project →
+          </Link>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+function SecondaryProjectCard({ project }: { project: Project }) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
@@ -24,17 +94,17 @@ function ProjectPreviewCard({ project }: { project: Project }) {
     >
       {project.image &&
         (shouldReduceMotion ? (
-          <div className="relative h-40 overflow-hidden rounded-t-[var(--radius-card)]">
+          <div className="relative h-36 overflow-hidden rounded-t-[var(--radius-card)]">
             <Image
               src={project.image}
               alt={`${project.title} preview`}
               width={640}
               height={400}
-              className="h-40 w-full object-cover"
+              className="h-36 w-full object-cover"
             />
           </div>
         ) : (
-          <div className="relative h-40 overflow-hidden rounded-t-[var(--radius-card)]">
+          <div className="relative h-36 overflow-hidden rounded-t-[var(--radius-card)]">
             <motion.div
               className="h-full w-full"
               whileHover={{ scale: 1.04 }}
@@ -45,36 +115,19 @@ function ProjectPreviewCard({ project }: { project: Project }) {
                 alt={`${project.title} preview`}
                 width={640}
                 height={400}
-                className="h-40 w-full object-cover"
+                className="h-36 w-full object-cover"
               />
             </motion.div>
-            <div className="pointer-events-none absolute inset-0 flex items-end bg-slate-950/0 p-4 transition-colors duration-300 group-hover:bg-slate-950/60">
-              <span className="translate-y-2 text-sm font-medium text-cyan-400 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                View project →
-              </span>
-            </div>
           </div>
         ))}
 
-      <div className="flex flex-1 flex-col p-6">
-        <div className="mb-4 flex flex-wrap gap-1.5">
-          {project.techStack.slice(0, 4).map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full border border-cyan-800 bg-cyan-950 px-2 py-0.5 text-[10px] text-cyan-400"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
+      <div className="flex flex-1 flex-col p-5">
         <h3 className="mb-2 font-display font-semibold text-slate-100">
           {project.title}
         </h3>
-        <p className="mb-4 line-clamp-2 text-sm text-slate-400">
+        <p className="mb-3 line-clamp-2 text-sm text-slate-400">
           {project.description}
         </p>
-
         <span className="mt-auto text-sm text-cyan-400">View project →</span>
       </div>
     </Card>
@@ -83,38 +136,47 @@ function ProjectPreviewCard({ project }: { project: Project }) {
 
 export default function ProjectsPreview() {
   const shouldReduceMotion = useReducedMotion();
+  const spotlight = homeSpotlightProject;
+  const secondary = homeSecondaryProjects;
+
+  if (!spotlight) return null;
 
   return (
-    <section className="section-divider section-surface py-20">
+    <section className="section-divider section-surface py-16 sm:py-20">
       <Container>
         <AnimatedSection>
           <SectionHeader
             label="03 — Work"
             title="Featured Projects"
-            subtitle="Check out my recent work"
+            subtitle="Live products and platforms — no placeholders"
           />
 
-          {shouldReduceMotion ? (
-            <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {featuredProjects.map((project) => (
-                <ProjectPreviewCard key={project.id} project={project} />
-              ))}
-            </div>
-          ) : (
-            <motion.div
-              className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
-              variants={staggerContainer()}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-            >
-              {featuredProjects.map((project) => (
-                <motion.div key={project.id} variants={staggerItem}>
-                  <ProjectPreviewCard project={project} />
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
+          <div className="mb-8">
+            <SpotlightProject project={spotlight} />
+          </div>
+
+          {secondary.length > 0 &&
+            (shouldReduceMotion ? (
+              <div className="mb-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+                {secondary.map((project) => (
+                  <SecondaryProjectCard key={project.id} project={project} />
+                ))}
+              </div>
+            ) : (
+              <motion.div
+                className="mb-12 grid grid-cols-1 gap-6 sm:grid-cols-2"
+                variants={staggerContainer()}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-80px" }}
+              >
+                {secondary.map((project) => (
+                  <motion.div key={project.id} variants={staggerItem}>
+                    <SecondaryProjectCard project={project} />
+                  </motion.div>
+                ))}
+              </motion.div>
+            ))}
 
           <div className="text-center">
             <Button href="/projects">View All Projects</Button>

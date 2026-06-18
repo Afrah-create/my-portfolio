@@ -5,6 +5,7 @@
 export const siteConfig = {
   name: "Awongo Fahadi Rashid",
   shortName: "Awongo Rashid",
+  initials: "AFR",
   title: "Awongo Fahadi Rashid | Software Engineer",
   description:
     "Software engineer and full-stack developer portfolio featuring selected projects, technical skills, and professional background.",

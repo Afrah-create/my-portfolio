@@ -1,7 +1,9 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Link from "next/link";
-import { SOCIAL_LINKS } from "@/lib/constants";
+import { CONTACT, NAVIGATION_LINKS, SOCIAL_LINKS } from "@/lib/constants";
+import { siteConfig } from "@/lib/site";
 import Container from "./Container";
 
 function GitHubIcon() {
@@ -22,19 +24,8 @@ function WhatsAppIcon() {
 
 function MailIcon() {
   return (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-      aria-hidden
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-      />
+    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
     </svg>
   );
 }
@@ -44,12 +35,6 @@ const iconByName: Record<string, React.ReactNode> = {
   WhatsApp: <WhatsAppIcon />,
   Email: <MailIcon />,
 };
-
-const socialLinks = SOCIAL_LINKS.map((link) => ({
-  ...link,
-  icon: iconByName[link.name],
-  external: link.name !== "Email",
-}));
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -61,34 +46,82 @@ export default function Footer() {
   return (
     <footer className="border-t border-[var(--color-surface-2)] bg-[var(--color-bg)]">
       <Container>
-        <div className="flex flex-col items-center justify-between gap-6 py-8 md:flex-row">
-          <p className="text-sm text-slate-400">
-            © {currentYear} Awongo Fahadi Rashid. All rights reserved.
-          </p>
-
-          <div className="flex items-center gap-4">
-            {socialLinks.map((social) => (
-              <Link
-                key={social.name}
-                href={social.href}
-                aria-label={social.name}
-                {...(social.external && {
-                  target: "_blank",
-                  rel: "noopener noreferrer",
-                })}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-surface-2)] text-slate-400 transition-colors hover:border-cyan-700 hover:text-cyan-400"
-              >
-                {social.icon}
-              </Link>
-            ))}
+        <div className="grid gap-10 py-10 md:grid-cols-[1.2fr_1fr_1fr] md:gap-8">
+          <div>
+            <p className="font-display text-lg font-bold text-slate-100">
+              {siteConfig.shortName}
+            </p>
+            <p className="mt-2 max-w-xs text-sm leading-relaxed text-slate-500">
+              {siteConfig.og.tagline}
+            </p>
+            <p className="mt-4 font-mono text-xs text-slate-600">
+              Built with Next.js & TypeScript
+            </p>
           </div>
 
+          <div>
+            <p className="mb-3 font-mono text-xs uppercase tracking-wider text-slate-500">
+              Navigate
+            </p>
+            <ul className="space-y-2">
+              {NAVIGATION_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-slate-400 transition-colors hover:text-cyan-400"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link
+                  href="/#contact"
+                  className="text-sm text-slate-400 transition-colors hover:text-cyan-400"
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="mb-3 font-mono text-xs uppercase tracking-wider text-slate-500">
+              Connect
+            </p>
+            <a
+              href={`mailto:${CONTACT.email}`}
+              className="block text-sm text-slate-400 transition-colors hover:text-cyan-400"
+            >
+              {CONTACT.email}
+            </a>
+            <div className="mt-4 flex gap-3">
+              {SOCIAL_LINKS.map((social) => (
+                <Link
+                  key={social.name}
+                  href={social.href}
+                  aria-label={social.name}
+                  {...(social.name !== "Email" && {
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                  })}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--color-surface-2)] text-slate-400 transition-colors hover:border-cyan-700 hover:text-cyan-400"
+                >
+                  {iconByName[social.name]}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-[var(--color-surface-2)] py-6 text-sm text-slate-500 sm:flex-row">
+          <p>© {currentYear} {siteConfig.name}. All rights reserved.</p>
           <button
             type="button"
             onClick={scrollToTop}
-            className="text-sm text-slate-400 transition-colors hover:text-cyan-400"
+            className="transition-colors hover:text-cyan-400"
           >
-            Back to top
+            Back to top ↑
           </button>
         </div>
       </Container>

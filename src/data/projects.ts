@@ -46,7 +46,7 @@ export const projects: Project[] = [
     techStack: ["HTML5", "CSS3", "JavaScript", "Bootstrap"],
     link: "https://afrah-create.github.io/Bweranyangi-Girls-Group-G/",
     github: "https://github.com/Afrah-Create/Bweranyangi-Girls-Group-G",
-    image: "/projects/school.JPG",
+    image: "/projects/school.png",
   },
   {
     id: "3",
@@ -101,3 +101,19 @@ export const projects: Project[] = [
     link: "https://www.centerfortomorrow.org",
   },
 ];
+
+const PLACEHOLDER_PATTERNS = ["example.com", "username"];
+
+/** Projects with real, deployable links (excludes demo placeholders). */
+export function isLiveProject(project: Project): boolean {
+  return !PLACEHOLDER_PATTERNS.some((pattern) => project.link.includes(pattern));
+}
+
+export const liveProjects = projects.filter(isLiveProject);
+
+/** First project shown as homepage spotlight. */
+export const homeSpotlightProject = liveProjects[0];
+
+/** Secondary cards on the homepage projects section. */
+export const homeSecondaryProjects = liveProjects.slice(1, 3);
+

@@ -34,3 +34,23 @@ export const SKILLS = [
   "Git",
   "Docker",
 ];
+
+export const HIGHLIGHT_STATS = [
+  { value: "25+", label: "Projects built" },
+  { value: "10+", label: "Live demos" },
+  { value: "15+", label: "Technologies" },
+  { value: "Open", label: "To opportunities" },
+] as const;
+
+export const HERO_PROOF = "25+ projects · Makerere · Available for work";
+
+export const HERO_STAT_CHIPS = [
+  { value: "3+", label: "Years coding" },
+  { value: "10+", label: "Live projects" },
+] as const;
+
+export const CURRENTLY_BUILDING = {
+  label: "Currently building",
+  project: "MAMSA Online Voting",
+  href: "https://e-vote-mamsa.vercel.app/",
+} as const;

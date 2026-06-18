@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { projects } from "@/data/projects";
+import { liveProjects, projects } from "@/data/projects";
 import { Project } from "@/types/project";
 import { Card } from "@/components/ui/Card";
 import { springTransition } from "@/lib/motion";
@@ -13,7 +13,7 @@ const allTechTags = Array.from(
   new Set(projects.flatMap((project) => project.techStack))
 ).sort();
 
-const featuredProject = projects[0];
+const featuredProject = liveProjects[0] ?? projects[0];
 
 function FilterPill({
   active,
@@ -250,7 +250,7 @@ export default function ProjectsGrid() {
     <>
       {!activeTag && <FeaturedProject project={featuredProject} />}
 
-      <div className="mb-10 flex flex-wrap justify-center gap-2">
+      <div className="mb-10 flex flex-wrap justify-start gap-2">
         <FilterPill active={activeTag === null} onClick={() => setActiveTag(null)}>
           All
         </FilterPill>

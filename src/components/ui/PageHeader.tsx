@@ -1,14 +1,11 @@
-"use client";
-
 import { ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { fadeUp } from "@/lib/motion";
 
 export interface PageHeaderProps {
   label: string;
   title: ReactNode;
   subtitle?: string;
   className?: string;
+  align?: "center" | "left";
 }
 
 export default function PageHeader({
@@ -16,11 +13,14 @@ export default function PageHeader({
   title,
   subtitle,
   className = "",
+  align = "center",
 }: PageHeaderProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const alignClass = align === "center" ? "text-center" : "text-left";
+  const subtitleClass =
+    align === "center" ? "mx-auto max-w-2xl" : "max-w-2xl";
 
-  const inner = (
-    <>
+  return (
+    <div className={`${alignClass} ${className}`}>
       <p className="mb-3 font-mono text-sm tracking-wider text-cyan-400">
         {label}
       </p>
@@ -28,25 +28,12 @@ export default function PageHeader({
         {title}
       </h1>
       {subtitle && (
-        <p className="mx-auto mt-5 max-w-2xl text-base text-slate-400 sm:text-lg">
+        <p
+          className={`mt-5 text-base text-slate-400 sm:text-lg ${subtitleClass}`}
+        >
           {subtitle}
         </p>
       )}
-    </>
-  );
-
-  if (shouldReduceMotion) {
-    return <div className={`text-center ${className}`}>{inner}</div>;
-  }
-
-  return (
-    <motion.div
-      className={`text-center ${className}`}
-      initial="hidden"
-      animate="visible"
-      variants={fadeUp(0)}
-    >
-      {inner}
-    </motion.div>
+    </div>
   );
 }
