@@ -5,6 +5,7 @@ import Container from "@/components/layout/Container";
 import PageHeader from "@/components/ui/PageHeader";
 import ProfilePortrait from "@/components/ui/ProfilePortrait";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
+import SkillsMarquee from "@/components/about/SkillsMarquee";
 import { SKILLS } from "@/lib/constants";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 
@@ -132,26 +133,9 @@ export default function AboutPage() {
               Skills & Technologies
             </h2>
 
-            <motion.div
-              variants={shouldReduceMotion ? undefined : staggerContainer(0.04)}
-              initial={shouldReduceMotion ? false : "hidden"}
-              whileInView="show"
-              viewport={{ once: true, margin: "-60px" }}
-              className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 sm:gap-4"
-            >
-              {SKILLS.map((skill) => (
-                <motion.div
-                  key={skill}
-                  variants={staggerItem}
-                  whileHover={shouldReduceMotion ? undefined : { y: -3 }}
-                  className="rounded-xl border border-border bg-surface p-4 text-center transition-colors hover:border-tag-border/60 hover:bg-accent/5 sm:p-5"
-                >
-                  <span className="break-words text-xs font-semibold text-secondary sm:text-sm">
-                    {skill}
-                  </span>
-                </motion.div>
-              ))}
-            </motion.div>
+            <SkillsMarquee />
+
+            <p className="sr-only">{SKILLS.join(", ")}</p>
           </motion.section>
 
           {/* Timeline */}

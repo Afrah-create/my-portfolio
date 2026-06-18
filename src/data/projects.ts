@@ -27,7 +27,7 @@ export const projects: Project[] = [
       "A web-based school management platform with secure authentication and role-based workflows for administrators, teachers, and staff to manage school operations online.",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
     link: "https://school-management-systme-web.vercel.app/login",
-    image: "/projects/school.JPG",
+    image: "/projects/school.png",
 
   },
   {

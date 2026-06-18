@@ -1,12 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { liveProjects, projects } from "@/data/projects";
 import { Project } from "@/types/project";
 import { Card } from "@/components/ui/Card";
+import ProjectImage from "@/components/projects/ProjectImage";
 import { springTransition } from "@/lib/motion";
 
 const allTechTags = Array.from(
@@ -56,43 +56,16 @@ function FilterPill({
 }
 
 function ProjectGridCard({ project }: { project: Project }) {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <Card glowOnHover className="group flex h-full flex-col overflow-hidden p-0">
-      {project.image &&
-        (shouldReduceMotion ? (
-          <div className="relative h-44 overflow-hidden rounded-t-[var(--radius-card)]">
-            <Image
-              src={project.image}
-              alt={`${project.title} preview`}
-              width={800}
-              height={500}
-              className="h-44 w-full object-cover"
-            />
-          </div>
-        ) : (
-          <div className="relative h-44 overflow-hidden rounded-t-[var(--radius-card)]">
-            <motion.div
-              className="h-full w-full"
-              whileHover={{ scale: 1.04 }}
-              transition={{ duration: 0.25 }}
-            >
-              <Image
-                src={project.image}
-                alt={`${project.title} preview`}
-                width={800}
-                height={500}
-                className="h-44 w-full object-cover"
-              />
-            </motion.div>
-            <div className="pointer-events-none absolute inset-0 flex items-end bg-transparent p-4 transition-colors duration-300 group-hover:bg-overlay">
-              <span className="translate-y-2 text-sm font-medium text-accent opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                View project →
-              </span>
-            </div>
-          </div>
-        ))}
+      {project.image && (
+        <ProjectImage
+          src={project.image}
+          alt={`${project.title} preview`}
+          variant="card"
+          showHoverHint
+        />
+      )}
 
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-4 flex flex-wrap gap-1.5">
@@ -161,36 +134,20 @@ function ProjectGridCard({ project }: { project: Project }) {
 }
 
 function FeaturedProject({ project }: { project: Project }) {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <Card glowOnHover className="group mb-12 overflow-hidden p-0 lg:mb-16">
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {project.image && (
-          <div className="relative h-56 overflow-hidden lg:h-auto lg:min-h-[320px]">
-            {shouldReduceMotion ? (
-              <Image
-                src={project.image}
-                alt={`${project.title} preview`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            ) : (
-              <motion.div className="h-full w-full" whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-                <Image
-                  src={project.image}
-                  alt={`${project.title} preview`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </motion.div>
-            )}
-            <span className="absolute left-4 top-4 rounded-full border border-accent-border bg-accent/10 px-3 py-1 font-mono text-xs text-accent">
-              Featured
-            </span>
-          </div>
+          <ProjectImage
+            src={project.image}
+            alt={`${project.title} preview`}
+            variant="spotlight"
+            badge={
+              <span className="absolute left-4 top-4 z-10 rounded-full border border-accent-border bg-accent/10 px-3 py-1 font-mono text-xs text-accent backdrop-blur-sm">
+                Featured
+              </span>
+            }
+          />
         )}
 
         <div className="flex flex-col justify-center p-5 sm:p-8 lg:p-10">

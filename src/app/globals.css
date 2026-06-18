@@ -272,6 +272,10 @@
     animation-play-state: paused;
   }
 
+  .category-row:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
   @media (max-width: 639px), (hover: none) {
     .marquee-track,
     .marquee-track-reverse {

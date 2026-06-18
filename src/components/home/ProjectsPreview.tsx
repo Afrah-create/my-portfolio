@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import {
@@ -13,43 +12,24 @@ import Button from "@/components/ui/Button";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Card } from "@/components/ui/Card";
 import SectionHeader from "@/components/ui/SectionHeader";
+import ProjectImage from "@/components/projects/ProjectImage";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 
 function SpotlightProject({ project }: { project: Project }) {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <Card glowOnHover className="group overflow-hidden p-0">
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {project.image && (
-          <div className="relative h-56 overflow-hidden lg:h-auto lg:min-h-[320px]">
-            {shouldReduceMotion ? (
-              <Image
-                src={project.image}
-                alt={`${project.title} preview`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            ) : (
-              <motion.div
-                className="h-full w-full"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Image
-                  src={project.image}
-                  alt={`${project.title} preview`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </motion.div>
-            )}
-            <span className="absolute left-4 top-4 rounded-full border border-accent-border bg-accent/10 px-3 py-1 font-mono text-xs text-accent">
-              Spotlight
-            </span>
-          </div>
+          <ProjectImage
+            src={project.image}
+            alt={`${project.title} preview`}
+            variant="spotlight"
+            badge={
+              <span className="absolute left-4 top-4 z-10 rounded-full border border-accent-border bg-accent/10 px-3 py-1 font-mono text-xs text-accent backdrop-blur-sm">
+                Spotlight
+              </span>
+            }
+          />
         )}
 
         <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
@@ -84,42 +64,19 @@ function SpotlightProject({ project }: { project: Project }) {
 }
 
 function SecondaryProjectCard({ project }: { project: Project }) {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <Card
       href={project.link}
       glowOnHover
       className="group flex h-full flex-col overflow-hidden p-0"
     >
-      {project.image &&
-        (shouldReduceMotion ? (
-          <div className="relative h-36 overflow-hidden rounded-t-[var(--radius-card)]">
-            <Image
-              src={project.image}
-              alt={`${project.title} preview`}
-              width={640}
-              height={400}
-              className="h-36 w-full object-cover"
-            />
-          </div>
-        ) : (
-          <div className="relative h-36 overflow-hidden rounded-t-[var(--radius-card)]">
-            <motion.div
-              className="h-full w-full"
-              whileHover={{ scale: 1.04 }}
-              transition={{ duration: 0.25 }}
-            >
-              <Image
-                src={project.image}
-                alt={`${project.title} preview`}
-                width={640}
-                height={400}
-                className="h-36 w-full object-cover"
-              />
-            </motion.div>
-          </div>
-        ))}
+      {project.image && (
+        <ProjectImage
+          src={project.image}
+          alt={`${project.title} preview`}
+          variant="card"
+        />
+      )}
 
       <div className="flex flex-1 flex-col p-5">
         <h3 className="mb-2 font-display font-semibold text-foreground">
