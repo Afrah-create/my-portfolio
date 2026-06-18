@@ -96,7 +96,7 @@ function ServiceRow({
         href={service.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="shrink-0 self-start rounded-full border border-tag-border/50 bg-tag/40 px-3 py-1.5 text-xs font-medium text-accent transition-colors group-hover:border-accent sm:self-center"
+        className="shrink-0 self-start inline-flex min-h-[44px] items-center rounded-full border border-tag-border/50 bg-tag/40 px-4 py-2.5 text-xs font-medium text-accent transition-colors group-hover:border-accent sm:self-center"
       >
         → {service.project}
       </a>

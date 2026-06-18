@@ -30,7 +30,7 @@ function FilterPill({
     <button
       type="button"
       onClick={onClick}
-      className={`relative rounded-full px-4 py-2 text-sm transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+      className={`relative shrink-0 min-h-[44px] rounded-full px-4 py-2.5 text-sm transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
         active
           ? "font-medium text-accent-foreground"
           : "border border-border bg-surface text-muted hover:border-accent-border"
@@ -99,7 +99,7 @@ function ProjectGridCard({ project }: { project: Project }) {
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="rounded-full border border-tag-border bg-tag px-2 py-0.5 text-[10px] text-accent"
+              className="rounded-full border border-tag-border bg-tag px-2 py-0.5 text-xs text-accent"
             >
               {tech}
             </span>
@@ -118,7 +118,7 @@ function ProjectGridCard({ project }: { project: Project }) {
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center text-sm text-accent transition-colors hover:text-accent-hover"
+            className="inline-flex min-h-[44px] items-center py-2 text-sm text-accent transition-colors hover:text-accent-hover"
           >
             Live Demo
             <svg
@@ -138,7 +138,7 @@ function ProjectGridCard({ project }: { project: Project }) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center text-sm text-muted transition-colors hover:text-secondary"
+              className="inline-flex min-h-[44px] items-center py-2 text-sm text-muted transition-colors hover:text-secondary"
             >
               GitHub
               <svg
@@ -193,7 +193,7 @@ function FeaturedProject({ project }: { project: Project }) {
           </div>
         )}
 
-        <div className="flex flex-col justify-center p-8 lg:p-10">
+        <div className="flex flex-col justify-center p-5 sm:p-8 lg:p-10">
           <div className="mb-4 flex flex-wrap gap-1.5">
             {project.techStack.map((tech) => (
               <span
@@ -215,7 +215,7 @@ function FeaturedProject({ project }: { project: Project }) {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-hover"
+              className="inline-flex min-h-[44px] items-center rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-hover"
             >
               View Live Demo
             </Link>
@@ -224,7 +224,7 @@ function FeaturedProject({ project }: { project: Project }) {
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center rounded-xl border border-border-strong px-5 py-2.5 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
+                className="inline-flex min-h-[44px] items-center rounded-xl border border-border-strong px-5 py-2.5 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
               >
                 GitHub
               </Link>
@@ -250,7 +250,7 @@ export default function ProjectsGrid() {
     <>
       {!activeTag && <FeaturedProject project={featuredProject} />}
 
-      <div className="mb-10 flex flex-wrap justify-start gap-2">
+      <div className="-mx-4 mb-10 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:justify-start sm:overflow-visible sm:px-0">
         <FilterPill active={activeTag === null} onClick={() => setActiveTag(null)}>
           All
         </FilterPill>

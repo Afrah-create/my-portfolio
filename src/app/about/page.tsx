@@ -44,7 +44,7 @@ export default function AboutPage() {
           }
           subtitle="Learn more about my journey, skills, and what drives me as a developer."
           align="left"
-          className="mb-16 sm:mb-20"
+          className="mb-10 sm:mb-16 md:mb-20"
         />
 
         <div className="max-w-6xl mx-auto">
@@ -58,7 +58,7 @@ export default function AboutPage() {
             >
               <ProfilePortrait variant="about" priority className="lg:max-w-none" />
 
-              <div className="mt-8 grid grid-cols-3 gap-3">
+              <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {stats.map((stat) => (
                   <div
                     key={stat.label}
@@ -70,7 +70,7 @@ export default function AboutPage() {
                         suffix={stat.suffix}
                       />
                     </div>
-                    <div className="mt-1 text-[10px] font-medium uppercase tracking-wide text-foreground0 sm:text-xs">
+                    <div className="mt-1 px-1 text-xs font-medium uppercase leading-tight tracking-wide text-faint">
                       {stat.label}
                     </div>
                   </div>
@@ -146,7 +146,7 @@ export default function AboutPage() {
                   whileHover={shouldReduceMotion ? undefined : { y: -3 }}
                   className="rounded-xl border border-border bg-surface p-4 text-center transition-colors hover:border-tag-border/60 hover:bg-accent/5 sm:p-5"
                 >
-                  <span className="text-sm font-semibold text-secondary sm:text-base">
+                  <span className="break-words text-xs font-semibold text-secondary sm:text-sm">
                     {skill}
                   </span>
                 </motion.div>
@@ -193,7 +193,7 @@ export default function AboutPage() {
                       {item.title}
                     </h3>
                     <p className="text-sm font-medium text-muted">{item.org}</p>
-                    <p className="mt-1 text-sm text-foreground0">{item.detail}</p>
+                    <p className="mt-1 text-sm text-faint">{item.detail}</p>
                   </motion.div>
                 ))}
               </div>

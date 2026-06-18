@@ -12,9 +12,14 @@ const timeline = [
 ];
 
 const bentoTiles = [
-  { label: "Education", value: "Makerere University", span: "col-span-2 row-span-2" },
-  { label: "Focus", value: "Full-Stack Development", span: "col-span-1" },
-  { label: "Based in", value: "Uganda", span: "col-span-1" },
+  {
+    label: "Education",
+    value: "Makerere University",
+    span: "sm:col-span-2 sm:row-span-2",
+    large: true,
+  },
+  { label: "Focus", value: "Full-Stack Development", span: "", large: false },
+  { label: "Based in", value: "Uganda", span: "", large: false },
 ];
 
 export default function AboutPreview() {
@@ -32,7 +37,7 @@ export default function AboutPreview() {
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
             <AnimatedSection delay={0.1}>
               <blockquote className="mb-8 border-l-2 border-accent/50 pl-5">
-                <p className="font-display text-xl font-semibold leading-snug text-secondary sm:text-2xl">
+                <p className="font-display text-lg font-semibold leading-snug text-secondary sm:text-xl">
                   I build web applications that solve real problems — from
                   voting platforms to health education sites.
                 </p>
@@ -48,7 +53,7 @@ export default function AboutPreview() {
                 and creating applications that make a meaningful impact.
               </p>
 
-              <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:gap-6">
+              <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:gap-6">
                 {timeline.map((item) => (
                   <div key={item.step} className="flex items-start gap-3">
                     <span className="font-mono text-xs text-accent">
@@ -58,7 +63,7 @@ export default function AboutPreview() {
                       <p className="text-sm font-medium text-secondary">
                         {item.label}
                       </p>
-                      <p className="text-xs text-foreground0">{item.detail}</p>
+                      <p className="text-xs text-faint">{item.detail}</p>
                     </div>
                   </div>
                 ))}
@@ -66,7 +71,7 @@ export default function AboutPreview() {
 
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 rounded-xl border border-accent-border bg-accent/10 px-6 py-3 text-sm font-semibold text-accent transition-colors duration-200 hover:border-accent hover:bg-accent/20"
+                className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-accent-border bg-accent/10 px-6 py-3 text-sm font-semibold text-accent transition-colors duration-200 hover:border-accent hover:bg-accent/20 sm:w-auto"
               >
                 Learn more about me
                 <svg
@@ -84,7 +89,7 @@ export default function AboutPreview() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.15}>
-              <div className="grid grid-cols-2 gap-3 auto-rows-[minmax(5rem,auto)]">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:auto-rows-[minmax(5rem,auto)]">
                 {bentoTiles.map((tile) => (
                   <div
                     key={tile.label}
@@ -95,8 +100,8 @@ export default function AboutPreview() {
                     </p>
                     <p
                       className={`font-medium text-secondary ${
-                        tile.span.includes("row-span-2")
-                          ? "font-display text-lg sm:text-xl"
+                        tile.large
+                          ? "font-display text-base sm:text-xl"
                           : "text-sm"
                       }`}
                     >

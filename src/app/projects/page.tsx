@@ -20,10 +20,10 @@ export default function ProjectsPage() {
           title="Selected Work"
           subtitle="A curated selection of products, platforms, and experiments that showcase my approach to problem-solving and modern web development."
           align="left"
-          className="mb-12"
+          className="mb-8 sm:mb-12"
         />
 
-        <div className="mb-12 flex justify-start">
+        <div className="mb-8 flex justify-start sm:mb-12">
           <Link
             href="/resume.pdf"
             className="inline-flex items-center gap-2 rounded-xl border border-accent-border bg-accent/10 px-6 py-3 text-sm font-semibold text-accent transition-colors hover:border-accent hover:bg-accent/20"

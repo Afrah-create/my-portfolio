@@ -18,7 +18,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 const wrapperClassName =
-  "fixed bottom-5 right-5 z-40 sm:bottom-6 sm:right-6";
+  "fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-40 sm:bottom-6 sm:right-6";
 
 const linkClassName =
   "group flex items-center gap-0 overflow-hidden rounded-full border border-whatsapp-border bg-background/90 text-whatsapp shadow-[var(--shadow-fab)] backdrop-blur-md transition-colors hover:border-whatsapp hover:bg-whatsapp-muted focus-visible:ring-2 focus-visible:ring-whatsapp focus-visible:ring-offset-2 focus-visible:ring-offset-background";

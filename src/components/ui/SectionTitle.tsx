@@ -30,8 +30,8 @@ export default function SectionTitle({
   }
 
   return (
-    <div className={`mb-12 text-center ${className}`}>
-      <h2 className="font-display mb-4 text-3xl font-bold text-foreground md:text-4xl">
+    <div className={`mb-8 text-center sm:mb-12 ${className}`}>
+      <h2 className="font-display mb-4 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
         {children}
       </h2>
       {subtitle && (

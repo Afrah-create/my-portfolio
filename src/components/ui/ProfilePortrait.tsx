@@ -34,7 +34,7 @@ export default function ProfilePortrait({
 
   return (
     <figure className={`${styles.wrapper} ${className}`.trim()}>
-      <div className="relative">
+      <div className="relative pb-2 pr-2">
         <div
           className="pointer-events-none absolute -inset-px rounded-2xl border border-accent-border"
           aria-hidden

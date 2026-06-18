@@ -51,7 +51,7 @@ export default function Footer() {
             <p className="font-display text-lg font-bold text-foreground">
               {siteConfig.shortName}
             </p>
-            <p className="mt-2 max-w-xs text-sm leading-relaxed text-foreground0">
+            <p className="mt-2 max-w-xs text-sm leading-relaxed text-faint">
               {siteConfig.og.tagline}
             </p>
             <p className="mt-4 font-mono text-xs text-faint">
@@ -60,7 +60,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-3 font-mono text-xs uppercase tracking-wider text-foreground0">
+            <p className="mb-3 font-mono text-xs uppercase tracking-wider text-faint">
               Navigate
             </p>
             <ul className="space-y-2">
@@ -68,7 +68,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted transition-colors hover:text-accent"
+                    className="inline-block py-2 text-sm text-muted transition-colors hover:text-accent"
                   >
                     {link.name}
                   </Link>
@@ -77,7 +77,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/#contact"
-                  className="text-sm text-muted transition-colors hover:text-accent"
+                  className="inline-block py-2 text-sm text-muted transition-colors hover:text-accent"
                 >
                   Contact
                 </Link>
@@ -86,12 +86,12 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-3 font-mono text-xs uppercase tracking-wider text-foreground0">
+            <p className="mb-3 font-mono text-xs uppercase tracking-wider text-faint">
               Connect
             </p>
             <a
               href={`mailto:${CONTACT.email}`}
-              className="block text-sm text-muted transition-colors hover:text-accent"
+              className="block break-all py-1 text-sm text-muted transition-colors hover:text-accent"
             >
               {CONTACT.email}
             </a>
@@ -105,7 +105,7 @@ export default function Footer() {
                     target: "_blank",
                     rel: "noopener noreferrer",
                   })}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent-border hover:text-accent"
+                  className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent-border hover:text-accent"
                 >
                   {iconByName[social.name]}
                 </Link>
@@ -114,12 +114,12 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-border py-6 text-sm text-foreground0 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-border py-6 text-sm text-faint sm:flex-row">
           <p>© {currentYear} {siteConfig.name}. All rights reserved.</p>
           <button
             type="button"
             onClick={scrollToTop}
-            className="transition-colors hover:text-accent"
+            className="inline-flex min-h-[44px] items-center px-2 py-3 transition-colors hover:text-accent"
           >
             Back to top ↑
           </button>

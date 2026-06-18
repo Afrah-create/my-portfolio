@@ -110,12 +110,14 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   body {
     background: var(--bg);
     color: var(--text);
     font-family: var(--font-body);
+    overflow-x: clip;
   }
 
   h1,
@@ -190,7 +192,7 @@
   }
 
   .field-input {
-    @apply w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition-colors;
+    @apply w-full min-h-[44px] rounded-lg border px-4 py-3 text-sm outline-none transition-colors sm:py-2.5;
     border-color: var(--border);
     background: var(--bg);
     color: var(--text);
@@ -232,6 +234,24 @@
     box-shadow: var(--shadow-portrait);
   }
 
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .pb-safe {
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+  }
+
+  .pb-page {
+    padding-bottom: max(5rem, calc(env(safe-area-inset-bottom) + 4.5rem));
+  }
+
+  @media (min-width: 640px) {
+    .pb-page {
+      padding-bottom: max(6rem, calc(env(safe-area-inset-bottom) + 5rem));
+    }
+  }
+
   .marquee-track {
     animation: marquee 20s linear infinite;
   }
@@ -250,6 +270,13 @@
 
   .category-row:hover .marquee-track-reverse {
     animation-play-state: paused;
+  }
+
+  @media (max-width: 639px), (hover: none) {
+    .marquee-track,
+    .marquee-track-reverse {
+      animation: none !important;
+    }
   }
 }
 

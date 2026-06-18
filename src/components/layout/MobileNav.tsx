@@ -133,7 +133,7 @@ function MobileNavPanelContent({
         </ul>
       </nav>
 
-      <div className="border-t border-border px-6 py-6">
+      <div className="border-t border-border px-6 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
         <Link
           href="/#contact"
           onClick={onClose}
@@ -152,7 +152,7 @@ function MobileNavPanelContent({
                 target: "_blank",
                 rel: "noopener noreferrer",
               })}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-accent-border hover:text-accent"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-accent-border hover:text-accent"
             >
               {social.icon}
             </Link>

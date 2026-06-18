@@ -5,6 +5,18 @@ import Container from "@/components/layout/Container";
 import { HIGHLIGHT_STATS } from "@/lib/constants";
 import { fadeUp } from "@/lib/motion";
 
+function statLabel(label: string) {
+  if (label === "To opportunities") {
+    return (
+      <>
+        <span className="sm:hidden">Opportunities</span>
+        <span className="hidden sm:inline">{label}</span>
+      </>
+    );
+  }
+  return label;
+}
+
 export default function StatsBand() {
   const shouldReduceMotion = useReducedMotion();
 
@@ -13,13 +25,13 @@ export default function StatsBand() {
       {HIGHLIGHT_STATS.map((stat) => (
         <div
           key={stat.label}
-          className="flex flex-col items-center justify-center bg-background px-4 py-6 text-center sm:py-8"
+          className="flex flex-col items-center justify-center bg-background px-3 py-5 text-center sm:px-4 sm:py-8"
         >
-          <span className="font-display text-2xl font-bold text-accent sm:text-3xl">
+          <span className="font-display text-xl font-bold text-accent max-[380px]:text-lg sm:text-2xl md:text-3xl">
             {stat.value}
           </span>
-          <span className="mt-1 font-mono text-[10px] uppercase tracking-wider text-faint sm:text-xs">
-            {stat.label}
+          <span className="mt-1 font-mono text-[11px] uppercase leading-tight tracking-wider text-faint sm:text-xs">
+            {statLabel(stat.label)}
           </span>
         </div>
       ))}

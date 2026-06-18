@@ -19,7 +19,7 @@ export default function SectionHeader({
   const alignClass = align === "center" ? "text-center" : "text-left";
 
   return (
-    <div className={`mb-12 ${alignClass} ${className}`}>
+    <div className={`mb-8 sm:mb-12 ${alignClass} ${className}`}>
       <p className="mb-3 font-mono text-xs tracking-widest text-accent/90 sm:text-sm">
         {label}
       </p>

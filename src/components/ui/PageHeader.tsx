@@ -24,7 +24,7 @@ export default function PageHeader({
       <p className="mb-3 font-mono text-sm tracking-wider text-accent">
         {label}
       </p>
-      <h1 className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+      <h1 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-6xl">
         {title}
       </h1>
       {subtitle && (

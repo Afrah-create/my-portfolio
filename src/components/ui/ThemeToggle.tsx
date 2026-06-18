@@ -50,7 +50,7 @@ export default function ThemeToggle() {
   if (!mounted) {
     return (
       <span
-        className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border bg-surface"
+        className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border bg-surface sm:h-9 sm:w-9"
         aria-hidden
       />
     );
@@ -62,7 +62,7 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border bg-surface text-muted transition-colors hover:border-accent-border hover:text-accent"
+      className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border bg-surface text-muted transition-colors hover:border-accent-border hover:text-accent sm:h-9 sm:w-9"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {isDark ? <SunIcon /> : <MoonIcon />}

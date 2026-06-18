@@ -3,6 +3,7 @@
 import { useReducedMotion } from "framer-motion";
 import Container from "@/components/layout/Container";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const techCategories = [
   {
@@ -54,8 +55,8 @@ function CategoryRow({
         aria-hidden
       />
 
-      <div className="flex items-center gap-3 py-2 pl-3 pr-0 sm:gap-4 sm:py-2.5 sm:pl-4">
-        <span className="w-[5.25rem] shrink-0 font-mono text-[10px] font-semibold uppercase leading-tight tracking-wider text-accent/80 sm:w-[6.5rem] sm:text-[11px]">
+      <div className="flex flex-col gap-2 py-2.5 pl-3 pr-3 sm:flex-row sm:items-center sm:gap-4 sm:py-2.5 sm:pl-4 sm:pr-0">
+        <span className="w-full shrink-0 font-mono text-[10px] font-semibold uppercase leading-tight tracking-wider text-accent/80 sm:w-[6.5rem] sm:text-[11px]">
           {group.category}
         </span>
 
@@ -86,6 +87,8 @@ const rowDurations = ["18s", "22s", "16s", "20s", "19s"];
 
 export default function TechStack() {
   const shouldReduceMotion = useReducedMotion();
+  const isSmUp = useMediaQuery("(min-width: 640px)");
+  const useMarquee = !shouldReduceMotion && isSmUp;
 
   return (
     <section className="section-divider overflow-hidden py-16 sm:py-20">
@@ -102,7 +105,7 @@ export default function TechStack() {
             <CategoryRow
               key={group.category}
               group={group}
-              animated={!shouldReduceMotion}
+              animated={useMarquee}
               duration={rowDurations[index] ?? "18s"}
             />
           ))}

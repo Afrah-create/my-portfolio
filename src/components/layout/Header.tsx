@@ -91,7 +91,7 @@ export default function Header() {
   } as const;
 
   const navActions = (
-    <div className="flex items-center gap-2">
+    <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
       <ThemeToggle />
       <MenuButton
         open={mobileMenuOpen}
@@ -105,7 +105,7 @@ export default function Header() {
     return (
       <>
         <header
-          className="sticky top-0 z-50 border-b backdrop-blur-md"
+          className="sticky top-0 z-50 border-b pt-safe backdrop-blur-md"
           style={headerStyle}
         >
           <Container>
@@ -128,7 +128,7 @@ export default function Header() {
   return (
     <>
       <motion.header
-        className="sticky top-0 z-50 border-b backdrop-blur-md"
+        className="sticky top-0 z-50 border-b pt-safe backdrop-blur-md"
         style={headerStyle}
       >
         <Container>

@@ -165,7 +165,7 @@ export default function Contact() {
     `${fieldBaseClass} ${errors[field] ? fieldErrorClass : "border-border"}`;
 
   return (
-    <section id="contact" className="section-divider section-surface scroll-mt-24 py-20">
+    <section id="contact" className="section-divider section-surface scroll-mt-20 py-16 sm:scroll-mt-24 sm:py-20">
       <Container>
         <SectionHeader
           label="05 — Contact"
@@ -199,7 +199,7 @@ export default function Contact() {
                           {link.icon}
                         </span>
                         <div className="min-w-0">
-                          <p className="text-[10px] font-medium uppercase tracking-wider text-foreground0">
+                          <p className="text-[10px] font-medium uppercase tracking-wider text-faint">
                             {link.label}
                           </p>
                           <p className="truncate text-sm text-secondary">
@@ -211,7 +211,7 @@ export default function Contact() {
                   ))}
                 </ul>
 
-                <p className="mt-6 border-t border-border pt-5 text-xs text-foreground0">
+                <p className="mt-6 border-t border-border pt-5 text-xs text-faint">
                   Based in Uganda · Reach me anytime!
                 </p>
               </div>
@@ -226,7 +226,7 @@ export default function Contact() {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.98 }}
                       transition={{ duration: 0.3, ease: "easeOut" }}
-                      className="flex min-h-[22rem] flex-col items-center justify-center text-center"
+                      className="flex min-h-[16rem] flex-col items-center justify-center text-center sm:min-h-[22rem]"
                       role="status"
                       aria-live="polite"
                     >
