@@ -2,7 +2,6 @@
 
 import { useReducedMotion } from "framer-motion";
 import { SKILLS } from "@/lib/constants";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const midpoint = Math.ceil(SKILLS.length / 2);
 const skillsRowForward = SKILLS.slice(0, midpoint);
@@ -65,8 +64,7 @@ function SkillsMarqueeRow({
 
 export default function SkillsMarquee() {
   const shouldReduceMotion = useReducedMotion();
-  const isSmUp = useMediaQuery("(min-width: 640px)");
-  const animated = !shouldReduceMotion && isSmUp;
+  const animated = !shouldReduceMotion;
 
   return (
     <div className="flex flex-col gap-3 sm:gap-4">

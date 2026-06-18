@@ -3,7 +3,6 @@
 import { useReducedMotion } from "framer-motion";
 import Container from "@/components/layout/Container";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const techCategories = [
   {
@@ -87,8 +86,7 @@ const rowDurations = ["18s", "22s", "16s", "20s", "19s"];
 
 export default function TechStack() {
   const shouldReduceMotion = useReducedMotion();
-  const isSmUp = useMediaQuery("(min-width: 640px)");
-  const useMarquee = !shouldReduceMotion && isSmUp;
+  const useMarquee = !shouldReduceMotion;
 
   return (
     <section className="section-divider overflow-hidden py-16 sm:py-20">
