@@ -20,19 +20,13 @@ export default function Button({
   type = "button",
   disabled = false,
 }: ButtonProps) {
-  const baseStyles =
-    "inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]";
-
   const variantStyles = {
-    primary:
-      "bg-cyan-500 text-gray-950 hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-70",
-    secondary:
-      "border border-slate-600 text-slate-300 hover:border-cyan-500 hover:text-cyan-400 disabled:cursor-not-allowed disabled:opacity-70",
-    ghost:
-      "border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 hover:border-cyan-400/50 hover:bg-cyan-500/20 disabled:cursor-not-allowed disabled:opacity-70",
+    primary: "btn-primary",
+    secondary: "btn-secondary",
+    ghost: "btn-ghost",
   };
 
-  const buttonClasses = `${baseStyles} ${variantStyles[variant]} ${className}`;
+  const buttonClasses = `${variantStyles[variant]} ${className}`.trim();
 
   if (href) {
     return (

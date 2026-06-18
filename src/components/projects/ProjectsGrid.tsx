@@ -30,23 +30,23 @@ function FilterPill({
     <button
       type="button"
       onClick={onClick}
-      className={`relative rounded-full px-4 py-2 text-sm transition-colors focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] ${
+      className={`relative rounded-full px-4 py-2 text-sm transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
         active
-          ? "font-medium text-gray-950"
-          : "border border-[var(--color-surface-2)] bg-[var(--color-surface)] text-slate-400 hover:border-cyan-700"
+          ? "font-medium text-accent-foreground"
+          : "border border-border bg-surface text-muted hover:border-accent-border"
       }`}
     >
       {active && !shouldReduceMotion && (
         <motion.span
           layoutId="project-filter-pill"
-          className="absolute inset-0 rounded-full bg-cyan-500"
+          className="absolute inset-0 rounded-full bg-accent"
           transition={springTransition}
           aria-hidden
         />
       )}
       {active && shouldReduceMotion && (
         <span
-          className="absolute inset-0 rounded-full bg-cyan-500"
+          className="absolute inset-0 rounded-full bg-accent"
           aria-hidden
         />
       )}
@@ -86,8 +86,8 @@ function ProjectGridCard({ project }: { project: Project }) {
                 className="h-44 w-full object-cover"
               />
             </motion.div>
-            <div className="pointer-events-none absolute inset-0 flex items-end bg-slate-950/0 p-4 transition-colors duration-300 group-hover:bg-slate-950/70">
-              <span className="translate-y-2 text-sm font-medium text-cyan-400 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+            <div className="pointer-events-none absolute inset-0 flex items-end bg-transparent p-4 transition-colors duration-300 group-hover:bg-overlay">
+              <span className="translate-y-2 text-sm font-medium text-accent opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                 View project →
               </span>
             </div>
@@ -99,17 +99,17 @@ function ProjectGridCard({ project }: { project: Project }) {
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="rounded-full border border-cyan-800 bg-cyan-950 px-2 py-0.5 text-[10px] text-cyan-400"
+              className="rounded-full border border-tag-border bg-tag px-2 py-0.5 text-[10px] text-accent"
             >
               {tech}
             </span>
           ))}
         </div>
 
-        <h3 className="mb-2 font-display font-semibold text-slate-100">
+        <h3 className="mb-2 font-display font-semibold text-foreground">
           {project.title}
         </h3>
-        <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-slate-400">
+        <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-muted">
           {project.description}
         </p>
 
@@ -118,7 +118,7 @@ function ProjectGridCard({ project }: { project: Project }) {
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center text-sm text-cyan-400 transition-colors hover:text-cyan-300"
+            className="inline-flex items-center text-sm text-accent transition-colors hover:text-accent-hover"
           >
             Live Demo
             <svg
@@ -138,7 +138,7 @@ function ProjectGridCard({ project }: { project: Project }) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center text-sm text-slate-400 transition-colors hover:text-slate-200"
+              className="inline-flex items-center text-sm text-muted transition-colors hover:text-secondary"
             >
               GitHub
               <svg
@@ -187,7 +187,7 @@ function FeaturedProject({ project }: { project: Project }) {
                 />
               </motion.div>
             )}
-            <span className="absolute left-4 top-4 rounded-full border border-cyan-500/40 bg-cyan-500/10 px-3 py-1 font-mono text-xs text-cyan-400">
+            <span className="absolute left-4 top-4 rounded-full border border-accent-border bg-accent/10 px-3 py-1 font-mono text-xs text-accent">
               Featured
             </span>
           </div>
@@ -198,16 +198,16 @@ function FeaturedProject({ project }: { project: Project }) {
             {project.techStack.map((tech) => (
               <span
                 key={tech}
-                className="rounded-full border border-cyan-800 bg-cyan-950 px-2.5 py-0.5 text-xs text-cyan-400"
+                className="rounded-full border border-tag-border bg-tag px-2.5 py-0.5 text-xs text-accent"
               >
                 {tech}
               </span>
             ))}
           </div>
-          <h2 className="font-display mb-3 text-2xl font-bold text-slate-50 lg:text-3xl">
+          <h2 className="font-display mb-3 text-2xl font-bold text-foreground lg:text-3xl">
             {project.title}
           </h2>
-          <p className="mb-6 leading-relaxed text-slate-400">
+          <p className="mb-6 leading-relaxed text-muted">
             {project.description}
           </p>
           <div className="flex flex-wrap gap-4">
@@ -215,7 +215,7 @@ function FeaturedProject({ project }: { project: Project }) {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rounded-xl bg-cyan-500 px-5 py-2.5 text-sm font-semibold text-gray-950 transition-colors hover:bg-cyan-400"
+              className="inline-flex items-center rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-hover"
             >
               View Live Demo
             </Link>
@@ -224,7 +224,7 @@ function FeaturedProject({ project }: { project: Project }) {
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center rounded-xl border border-slate-600 px-5 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:border-cyan-500 hover:text-cyan-400"
+                className="inline-flex items-center rounded-xl border border-border-strong px-5 py-2.5 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
               >
                 GitHub
               </Link>

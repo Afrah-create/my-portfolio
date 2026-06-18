@@ -1,31 +1,121 @@
 @import "tailwindcss";
 
+/* ── Design tokens (light default, dark via .dark) ── */
 :root {
-  --color-bg: #030712;
-  --color-surface: #0f172a;
-  --color-surface-2: #1e293b;
-  --color-accent: #22d3ee;
-  --color-accent-dim: #0e7490;
-  --color-text: #f1f5f9;
-  --color-text-muted: #94a3b8;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-elevated: #e2e8f0;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --text: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+  --accent: #0891b2;
+  --accent-hover: #0e7490;
+  --accent-foreground: #ffffff;
+  --accent-muted: rgb(8 145 178 / 0.08);
+  --accent-border: rgb(8 145 178 / 0.22);
+  --accent-subtle: rgb(8 145 178 / 0.12);
+  --tag-bg: rgb(8 145 178 / 0.06);
+  --tag-border: rgb(8 145 178 / 0.2);
+  --ring: #0891b2;
+  --overlay: rgb(248 250 252 / 0.72);
+  --scrim: rgb(15 23 42 / 0.45);
+  --dot-grid: rgb(100 116 139 / 0.14);
+  --header-bg: rgb(248 250 252 / 0.88);
+  --header-border: rgb(8 145 178 / 0.14);
+  --shadow-portrait: 0 12px 40px rgb(15 23 42 / 0.12);
+  --shadow-fab: 0 4px 24px rgb(15 23 42 / 0.12);
+  --card-glow: 0 0 24px rgb(8 145 178 / 0.12);
+  --progress-track: #e2e8f0;
+  --input-placeholder: #94a3b8;
+  --whatsapp: #059669;
+  --whatsapp-hover: #047857;
+  --whatsapp-muted: rgb(5 150 105 / 0.08);
+  --whatsapp-border: rgb(5 150 105 / 0.28);
   --radius-card: 0.75rem;
   --font-display: var(--font-sora), system-ui, sans-serif;
   --font-body: var(--font-inter), system-ui, sans-serif;
 }
 
+.dark {
+  --bg: #030712;
+  --surface: #0f172a;
+  --surface-elevated: #1e293b;
+  --border: #1e293b;
+  --border-strong: #334155;
+  --text: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-faint: #64748b;
+  --accent: #22d3ee;
+  --accent-hover: #06b6d4;
+  --accent-foreground: #030712;
+  --accent-muted: rgb(34 211 238 / 0.1);
+  --accent-border: rgb(34 211 238 / 0.28);
+  --accent-subtle: rgb(34 211 238 / 0.15);
+  --tag-bg: rgb(34 211 238 / 0.06);
+  --tag-border: rgb(34 211 238 / 0.22);
+  --ring: #22d3ee;
+  --overlay: rgb(2 6 23 / 0.65);
+  --scrim: rgb(0 0 0 / 0.55);
+  --dot-grid: rgb(148 163 184 / 0.12);
+  --header-bg: rgb(3 7 18 / 0.9);
+  --header-border: rgb(34 211 238 / 0.12);
+  --shadow-portrait: 0 12px 40px rgb(0 0 0 / 0.35);
+  --shadow-fab: 0 4px 24px rgb(0 0 0 / 0.35);
+  --card-glow: 0 0 24px rgb(34 211 238 / 0.15);
+  --progress-track: #1e293b;
+  --input-placeholder: #475569;
+  --whatsapp: #34d399;
+  --whatsapp-hover: #6ee7b7;
+  --whatsapp-muted: rgb(52 211 153 / 0.1);
+  --whatsapp-border: rgb(52 211 153 / 0.28);
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-foreground: var(--text);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-muted: var(--accent-muted);
+  --color-accent-border: var(--accent-border);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-tag: var(--tag-bg);
+  --color-tag-border: var(--tag-border);
+  --color-ring: var(--ring);
+  --color-overlay: var(--overlay);
+  --color-scrim: var(--scrim);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-hover: var(--whatsapp-hover);
+  --color-whatsapp-muted: var(--whatsapp-muted);
+  --color-whatsapp-border: var(--whatsapp-border);
+  --color-progress-track: var(--progress-track);
+  --radius-card: var(--radius-card);
+}
+
 @layer base {
   * {
-    @apply border-gray-200;
-  }
-
-  body {
-    background: var(--color-bg);
-    color: var(--color-text);
-    font-family: var(--font-body);
+    border-color: var(--border);
   }
 
   html {
     scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
   }
 
   h1,
@@ -41,7 +131,78 @@
   textarea:focus-visible,
   select:focus-visible,
   [tabindex]:not([tabindex="-1"]):focus-visible {
-    @apply outline-none ring-2 ring-cyan-500 ring-offset-2 ring-offset-[var(--color-bg)];
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--bg),
+      0 0 0 4px var(--ring);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-semibold transition-colors duration-200;
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--accent-hover);
+  }
+
+  .btn-primary:disabled {
+    @apply cursor-not-allowed opacity-70;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-xl border px-6 py-3 text-sm font-semibold transition-colors duration-200;
+    border-color: var(--border-strong);
+    color: var(--text-secondary);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-xl border px-6 py-3 text-sm font-semibold transition-colors duration-200;
+    border-color: var(--accent-border);
+    background: var(--accent-muted);
+    color: var(--accent);
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--accent-subtle);
+  }
+
+  .accent-chip {
+    border: 1px solid var(--accent-border);
+    background: var(--accent-muted);
+    color: var(--accent);
+  }
+
+  .tag-pill {
+    @apply rounded-full border px-2 py-0.5 text-[10px];
+    border-color: var(--tag-border);
+    background: var(--tag-bg);
+    color: var(--accent);
+  }
+
+  .field-input {
+    @apply w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition-colors;
+    border-color: var(--border);
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .field-input::placeholder {
+    color: var(--input-placeholder);
+  }
+
+  .field-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent);
   }
 }
 
@@ -49,22 +210,26 @@
   .dot-grid {
     background-image: radial-gradient(
       circle,
-      rgba(148, 163, 184, 0.12) 1px,
+      var(--dot-grid) 1px,
       transparent 1px
     );
     background-size: 24px 24px;
   }
 
   .section-surface {
-    background-color: var(--color-surface);
+    background-color: var(--surface);
   }
 
   .section-divider {
-    border-top: 1px solid rgba(30, 41, 59, 0.8);
+    border-top: 1px solid var(--border);
   }
 
   .font-display {
     font-family: var(--font-display);
+  }
+
+  .shadow-portrait {
+    box-shadow: var(--shadow-portrait);
   }
 
   .marquee-track {

@@ -7,6 +7,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { NAVIGATION_LINKS } from "@/lib/constants";
 import { springTransition } from "@/lib/motion";
 import { siteConfig } from "@/lib/site";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import Container from "./Container";
 import MenuButton from "./MenuButton";
 import MobileNav from "./MobileNav";
@@ -21,17 +22,15 @@ function HeaderBrand() {
       aria-label={`${siteConfig.name} — Home`}
       className="group shrink-0 transition-opacity hover:opacity-90"
     >
-      {/* Initials — mobile & tablet */}
       <span
-        className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-cyan-500/25 bg-cyan-500/10 font-display text-sm font-bold tracking-wide text-cyan-400 transition-colors group-hover:border-cyan-500/40 group-hover:bg-cyan-500/15 lg:hidden"
+        className="accent-chip inline-flex h-9 w-9 items-center justify-center rounded-lg font-display text-sm font-bold tracking-wide transition-colors lg:hidden"
         aria-hidden
       >
         {siteConfig.initials}
       </span>
 
-      {/* Full name — large screens */}
-      <span className="hidden font-display text-lg font-bold leading-tight tracking-tight text-slate-100 lg:inline xl:text-xl">
-        <span className="text-cyan-400">{firstName}</span> {restOfName}
+      <span className="hidden font-display text-lg font-bold leading-tight tracking-tight text-foreground lg:inline xl:text-xl">
+        <span className="text-accent">{firstName}</span> {restOfName}
       </span>
     </Link>
   );
@@ -43,11 +42,6 @@ export default function Header() {
   const shouldReduceMotion = useReducedMotion();
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const { scrollY } = useScroll();
-  const headerBg = useTransform(
-    scrollY,
-    [0, 80],
-    ["rgba(3, 7, 18, 0.80)", "rgba(3, 7, 18, 0.95)"]
-  );
   const headerPadding = useTransform(scrollY, [0, 80], [16, 12]);
 
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
@@ -66,22 +60,20 @@ export default function Header() {
             key={link.href}
             href={link.href}
             className={`relative pb-1 text-sm font-medium transition-colors ${
-              isActive
-                ? "text-cyan-400"
-                : "text-slate-400 hover:text-cyan-400"
+              isActive ? "text-accent" : "text-muted hover:text-accent"
             }`}
           >
             {link.name}
             {isActive &&
               (shouldReduceMotion ? (
                 <span
-                  className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-cyan-400"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-accent"
                   aria-hidden
                 />
               ) : (
                 <motion.span
                   layoutId="nav-indicator"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-cyan-400"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-accent"
                   transition={springTransition}
                   aria-hidden
                 />
@@ -92,26 +84,35 @@ export default function Header() {
     </div>
   );
 
+  const headerStyle = {
+    backgroundColor: "var(--header-bg)",
+    borderBottomColor: "var(--header-border)",
+    borderBottomWidth: "1px",
+  } as const;
+
+  const navActions = (
+    <div className="flex items-center gap-2">
+      <ThemeToggle />
+      <MenuButton
+        open={mobileMenuOpen}
+        onClick={toggleMobileMenu}
+        buttonRef={menuButtonRef}
+      />
+    </div>
+  );
+
   if (shouldReduceMotion) {
     return (
       <>
         <header
           className="sticky top-0 z-50 border-b backdrop-blur-md"
-          style={{
-            backgroundColor: "rgba(3, 7, 18, 0.92)",
-            borderBottomColor: "rgba(34, 211, 238, 0.12)",
-            borderBottomWidth: "1px",
-          }}
+          style={headerStyle}
         >
           <Container>
             <nav className="flex items-center justify-between gap-4 py-4">
               <HeaderBrand />
               {navLinks}
-              <MenuButton
-                open={mobileMenuOpen}
-                onClick={toggleMobileMenu}
-                buttonRef={menuButtonRef}
-              />
+              {navActions}
             </nav>
           </Container>
         </header>
@@ -128,11 +129,7 @@ export default function Header() {
     <>
       <motion.header
         className="sticky top-0 z-50 border-b backdrop-blur-md"
-        style={{
-          backgroundColor: headerBg,
-          borderBottomColor: "rgba(34, 211, 238, 0.12)",
-          borderBottomWidth: "1px",
-        }}
+        style={headerStyle}
       >
         <Container>
           <motion.nav
@@ -141,11 +138,7 @@ export default function Header() {
           >
             <HeaderBrand />
             {navLinks}
-            <MenuButton
-              open={mobileMenuOpen}
-              onClick={toggleMobileMenu}
-              buttonRef={menuButtonRef}
-            />
+            {navActions}
           </motion.nav>
         </Container>
       </motion.header>

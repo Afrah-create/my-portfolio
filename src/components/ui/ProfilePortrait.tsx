@@ -35,13 +35,12 @@ export default function ProfilePortrait({
   return (
     <figure className={`${styles.wrapper} ${className}`.trim()}>
       <div className="relative">
-        {/* Accent offset frame */}
         <div
-          className="pointer-events-none absolute -inset-px rounded-2xl border border-cyan-500/25"
+          className="pointer-events-none absolute -inset-px rounded-2xl border border-accent-border"
           aria-hidden
         />
         <div
-          className={`relative overflow-hidden border border-slate-700/70 bg-[var(--color-surface)] shadow-[0_12px_40px_rgba(0,0,0,0.35)] ring-1 ring-slate-800/80 ${styles.frame}`}
+          className={`relative overflow-hidden border border-border-strong bg-surface shadow-portrait ring-1 ring-border ${styles.frame}`}
         >
           <div className={`relative w-full ${styles.aspect}`}>
             <Image
@@ -54,9 +53,8 @@ export default function ProfilePortrait({
             />
           </div>
         </div>
-        {/* Corner mark */}
         <span
-          className="absolute -bottom-2 -right-2 h-8 w-8 rounded-br-xl border-b-2 border-r-2 border-cyan-400/70"
+          className="absolute -bottom-2 -right-2 h-8 w-8 rounded-br-xl border-b-2 border-r-2 border-accent/70"
           aria-hidden
         />
       </div>

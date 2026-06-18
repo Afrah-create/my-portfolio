@@ -21,7 +21,7 @@ const wrapperClassName =
   "fixed bottom-5 right-5 z-40 sm:bottom-6 sm:right-6";
 
 const linkClassName =
-  "group flex items-center gap-0 overflow-hidden rounded-full border border-emerald-800/50 bg-[var(--color-bg)]/90 text-emerald-400 shadow-[0_4px_24px_rgba(0,0,0,0.35)] backdrop-blur-md transition-colors hover:border-emerald-600/60 hover:bg-emerald-950/40 focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]";
+  "group flex items-center gap-0 overflow-hidden rounded-full border border-whatsapp-border bg-background/90 text-whatsapp shadow-[var(--shadow-fab)] backdrop-blur-md transition-colors hover:border-whatsapp hover:bg-whatsapp-muted focus-visible:ring-2 focus-visible:ring-whatsapp focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
 export default function WhatsAppFab() {
   const shouldReduceMotion = useReducedMotion();
@@ -31,7 +31,7 @@ export default function WhatsAppFab() {
       <span className="flex h-12 w-12 shrink-0 items-center justify-center sm:h-[3.25rem] sm:w-[3.25rem]">
         <WhatsAppIcon className="h-5 w-5 sm:h-[1.35rem] sm:w-[1.35rem]" />
       </span>
-      <span className="max-w-0 overflow-hidden whitespace-nowrap pr-0 text-sm font-medium text-emerald-300 opacity-0 transition-all duration-300 group-hover:max-w-[7rem] group-hover:pr-4 group-hover:opacity-100 group-focus-visible:max-w-[7rem] group-focus-visible:pr-4 group-focus-visible:opacity-100">
+      <span className="max-w-0 overflow-hidden whitespace-nowrap pr-0 text-sm font-medium text-whatsapp-hover opacity-0 transition-all duration-300 group-hover:max-w-[7rem] group-hover:pr-4 group-hover:opacity-100 group-focus-visible:max-w-[7rem] group-focus-visible:pr-4 group-focus-visible:opacity-100">
         WhatsApp
       </span>
     </>

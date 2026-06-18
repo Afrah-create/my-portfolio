@@ -9,16 +9,16 @@ export default function StatsBand() {
   const shouldReduceMotion = useReducedMotion();
 
   const grid = (
-    <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[var(--color-surface-2)] bg-[var(--color-surface-2)] md:grid-cols-4">
+    <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-surface-elevated md:grid-cols-4">
       {HIGHLIGHT_STATS.map((stat) => (
         <div
           key={stat.label}
-          className="flex flex-col items-center justify-center bg-[var(--color-bg)] px-4 py-6 text-center sm:py-8"
+          className="flex flex-col items-center justify-center bg-background px-4 py-6 text-center sm:py-8"
         >
-          <span className="font-display text-2xl font-bold text-cyan-400 sm:text-3xl">
+          <span className="font-display text-2xl font-bold text-accent sm:text-3xl">
             {stat.value}
           </span>
-          <span className="mt-1 font-mono text-[10px] uppercase tracking-wider text-slate-500 sm:text-xs">
+          <span className="mt-1 font-mono text-[10px] uppercase tracking-wider text-faint sm:text-xs">
             {stat.label}
           </span>
         </div>

@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ScrollProgress from "@/components/layout/ScrollProgress";
 import WhatsAppFab from "@/components/layout/WhatsAppFab";
+import ThemeProvider from "@/components/providers/ThemeProvider";
 import { defaultMetadata } from "@/lib/seo";
 
 const inter = Inter({
@@ -26,19 +27,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" id="top">
+    <html lang="en" id="top" suppressHydrationWarning>
       <body className={`${inter.variable} ${sora.variable} font-sans antialiased`}>
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-cyan-500 focus:px-4 focus:py-2 focus:text-gray-950 focus-visible:ring-2 focus-visible:ring-cyan-500"
-        >
-          Skip to content
-        </a>
-        <ScrollProgress />
-        <Header />
-        {children}
-        <Footer />
-        <WhatsAppFab />
+        <ThemeProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-foreground"
+          >
+            Skip to content
+          </a>
+          <ScrollProgress />
+          <Header />
+          {children}
+          <Footer />
+          <WhatsAppFab />
+        </ThemeProvider>
       </body>
     </html>
   );

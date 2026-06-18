@@ -31,19 +31,19 @@ export default function AboutPreview() {
 
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
             <AnimatedSection delay={0.1}>
-              <blockquote className="mb-8 border-l-2 border-cyan-500/50 pl-5">
-                <p className="font-display text-xl font-semibold leading-snug text-slate-200 sm:text-2xl">
+              <blockquote className="mb-8 border-l-2 border-accent/50 pl-5">
+                <p className="font-display text-xl font-semibold leading-snug text-secondary sm:text-2xl">
                   I build web applications that solve real problems — from
                   voting platforms to health education sites.
                 </p>
               </blockquote>
 
-              <p className="mb-4 leading-relaxed text-slate-400">
+              <p className="mb-4 leading-relaxed text-muted">
                 I&apos;m Awongo Fahadi Rashid, a Software Engineering student
                 at Makerere University. I work across the full stack, from
                 intuitive interfaces to robust backend systems.
               </p>
-              <p className="mb-8 leading-relaxed text-slate-400">
+              <p className="mb-8 leading-relaxed text-muted">
                 I&apos;m driven by the challenge of solving complex problems
                 and creating applications that make a meaningful impact.
               </p>
@@ -51,14 +51,14 @@ export default function AboutPreview() {
               <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:gap-6">
                 {timeline.map((item) => (
                   <div key={item.step} className="flex items-start gap-3">
-                    <span className="font-mono text-xs text-cyan-400">
+                    <span className="font-mono text-xs text-accent">
                       {item.step}
                     </span>
                     <div>
-                      <p className="text-sm font-medium text-slate-200">
+                      <p className="text-sm font-medium text-secondary">
                         {item.label}
                       </p>
-                      <p className="text-xs text-slate-500">{item.detail}</p>
+                      <p className="text-xs text-foreground0">{item.detail}</p>
                     </div>
                   </div>
                 ))}
@@ -66,7 +66,7 @@ export default function AboutPreview() {
 
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-6 py-3 text-sm font-semibold text-cyan-400 transition-colors duration-200 hover:border-cyan-400/50 hover:bg-cyan-500/20"
+                className="inline-flex items-center gap-2 rounded-xl border border-accent-border bg-accent/10 px-6 py-3 text-sm font-semibold text-accent transition-colors duration-200 hover:border-accent hover:bg-accent/20"
               >
                 Learn more about me
                 <svg
@@ -88,13 +88,13 @@ export default function AboutPreview() {
                 {bentoTiles.map((tile) => (
                   <div
                     key={tile.label}
-                    className={`flex flex-col justify-end rounded-xl border border-[var(--color-surface-2)] bg-[var(--color-bg)] p-4 sm:p-5 ${tile.span}`}
+                    className={`flex flex-col justify-end rounded-xl border border-border bg-background p-4 sm:p-5 ${tile.span}`}
                   >
-                    <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-cyan-400">
+                    <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-accent">
                       {tile.label}
                     </p>
                     <p
-                      className={`font-medium text-slate-200 ${
+                      className={`font-medium text-secondary ${
                         tile.span.includes("row-span-2")
                           ? "font-display text-lg sm:text-xl"
                           : "text-sm"

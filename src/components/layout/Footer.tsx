@@ -44,23 +44,23 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-[var(--color-surface-2)] bg-[var(--color-bg)]">
+    <footer className="border-t border-border bg-background">
       <Container>
         <div className="grid gap-10 py-10 md:grid-cols-[1.2fr_1fr_1fr] md:gap-8">
           <div>
-            <p className="font-display text-lg font-bold text-slate-100">
+            <p className="font-display text-lg font-bold text-foreground">
               {siteConfig.shortName}
             </p>
-            <p className="mt-2 max-w-xs text-sm leading-relaxed text-slate-500">
+            <p className="mt-2 max-w-xs text-sm leading-relaxed text-foreground0">
               {siteConfig.og.tagline}
             </p>
-            <p className="mt-4 font-mono text-xs text-slate-600">
+            <p className="mt-4 font-mono text-xs text-faint">
               Built with Next.js & TypeScript
             </p>
           </div>
 
           <div>
-            <p className="mb-3 font-mono text-xs uppercase tracking-wider text-slate-500">
+            <p className="mb-3 font-mono text-xs uppercase tracking-wider text-foreground0">
               Navigate
             </p>
             <ul className="space-y-2">
@@ -68,7 +68,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-slate-400 transition-colors hover:text-cyan-400"
+                    className="text-sm text-muted transition-colors hover:text-accent"
                   >
                     {link.name}
                   </Link>
@@ -77,7 +77,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/#contact"
-                  className="text-sm text-slate-400 transition-colors hover:text-cyan-400"
+                  className="text-sm text-muted transition-colors hover:text-accent"
                 >
                   Contact
                 </Link>
@@ -86,12 +86,12 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-3 font-mono text-xs uppercase tracking-wider text-slate-500">
+            <p className="mb-3 font-mono text-xs uppercase tracking-wider text-foreground0">
               Connect
             </p>
             <a
               href={`mailto:${CONTACT.email}`}
-              className="block text-sm text-slate-400 transition-colors hover:text-cyan-400"
+              className="block text-sm text-muted transition-colors hover:text-accent"
             >
               {CONTACT.email}
             </a>
@@ -105,7 +105,7 @@ export default function Footer() {
                     target: "_blank",
                     rel: "noopener noreferrer",
                   })}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--color-surface-2)] text-slate-400 transition-colors hover:border-cyan-700 hover:text-cyan-400"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent-border hover:text-accent"
                 >
                   {iconByName[social.name]}
                 </Link>
@@ -114,12 +114,12 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-[var(--color-surface-2)] py-6 text-sm text-slate-500 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-border py-6 text-sm text-foreground0 sm:flex-row">
           <p>© {currentYear} {siteConfig.name}. All rights reserved.</p>
           <button
             type="button"
             onClick={scrollToTop}
-            className="transition-colors hover:text-cyan-400"
+            className="transition-colors hover:text-accent"
           >
             Back to top ↑
           </button>

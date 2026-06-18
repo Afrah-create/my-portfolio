@@ -80,15 +80,15 @@ function ServiceRow({
   service: (typeof services)[number];
 }) {
   return (
-    <div className="group flex flex-col gap-4 rounded-xl border border-[var(--color-surface-2)] bg-[var(--color-surface)] p-5 transition-colors hover:border-cyan-800/50 sm:flex-row sm:items-center sm:gap-6 sm:p-6">
-      <span className="font-mono text-2xl font-bold text-cyan-400/80">
+    <div className="group flex flex-col gap-4 rounded-xl border border-border bg-surface p-5 transition-colors hover:border-tag-border/50 sm:flex-row sm:items-center sm:gap-6 sm:p-6">
+      <span className="font-mono text-2xl font-bold text-accent/80">
         {service.number}
       </span>
       <div className="min-w-0 flex-1">
-        <h3 className="font-display font-semibold text-slate-100">
+        <h3 className="font-display font-semibold text-foreground">
           {service.title}
         </h3>
-        <p className="mt-1 text-sm leading-relaxed text-slate-400">
+        <p className="mt-1 text-sm leading-relaxed text-muted">
           {service.description}
         </p>
       </div>
@@ -96,7 +96,7 @@ function ServiceRow({
         href={service.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="shrink-0 self-start rounded-full border border-cyan-800/50 bg-cyan-950/40 px-3 py-1.5 text-xs font-medium text-cyan-400 transition-colors group-hover:border-cyan-600 sm:self-center"
+        className="shrink-0 self-start rounded-full border border-tag-border/50 bg-tag/40 px-3 py-1.5 text-xs font-medium text-accent transition-colors group-hover:border-accent sm:self-center"
       >
         → {service.project}
       </a>

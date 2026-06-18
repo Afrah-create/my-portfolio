@@ -26,7 +26,7 @@ export default function ProjectsPage() {
         <div className="mb-12 flex justify-start">
           <Link
             href="/resume.pdf"
-            className="inline-flex items-center gap-2 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-6 py-3 text-sm font-semibold text-cyan-400 transition-colors hover:border-cyan-400/50 hover:bg-cyan-500/20"
+            className="inline-flex items-center gap-2 rounded-xl border border-accent-border bg-accent/10 px-6 py-3 text-sm font-semibold text-accent transition-colors hover:border-accent hover:bg-accent/20"
           >
             Download Resume
             <svg

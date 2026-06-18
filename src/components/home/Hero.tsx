@@ -42,7 +42,7 @@ function RotatingRole({ shouldReduceMotion }: { shouldReduceMotion: boolean }) {
 
   if (shouldReduceMotion) {
     return (
-      <p className="text-lg font-normal text-slate-400 lg:text-xl">{roles[0]}</p>
+      <p className="text-lg font-normal text-muted lg:text-xl">{roles[0]}</p>
     );
   }
 
@@ -55,7 +55,7 @@ function RotatingRole({ shouldReduceMotion }: { shouldReduceMotion: boolean }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -14 }}
           transition={{ duration: 0.35, ease: "easeOut" }}
-          className="text-lg font-normal text-slate-400 lg:text-xl"
+          className="text-lg font-normal text-muted lg:text-xl"
         >
           {roles[index]}
         </motion.p>
@@ -73,11 +73,11 @@ function ScrollCue() {
       transition={{ delay: 1.2, duration: 0.5 }}
       aria-hidden
     >
-      <span className="font-mono text-[10px] uppercase tracking-widest text-slate-600">
+      <span className="font-mono text-[10px] uppercase tracking-widest text-faint">
         Scroll
       </span>
       <motion.svg
-        className="h-5 w-5 text-cyan-400/70"
+        className="h-5 w-5 text-accent/70"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -103,15 +103,15 @@ function HeroContent({ shouldReduceMotion }: { shouldReduceMotion: boolean }) {
 
   const content = (
     <>
-      <div className="mx-auto mb-6 h-[3px] w-10 rounded-full bg-cyan-400 lg:mx-0" />
-      <h1 className="font-display text-5xl font-black leading-[1.05] tracking-tight text-slate-50 sm:text-6xl lg:text-6xl xl:text-7xl">
-        <span className="text-cyan-400">{accentWord}</span> {restOfName}
+      <div className="mx-auto mb-6 h-[3px] w-10 rounded-full bg-accent lg:mx-0" />
+      <h1 className="font-display text-5xl font-black leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-6xl xl:text-7xl">
+        <span className="text-accent">{accentWord}</span> {restOfName}
       </h1>
       <RotatingRole shouldReduceMotion={shouldReduceMotion} />
-      <p className="font-mono text-xs tracking-wide text-slate-500 sm:text-sm">
+      <p className="font-mono text-xs tracking-wide text-foreground0 sm:text-sm">
         {HERO_PROOF}
       </p>
-      <p className="mx-auto max-w-lg text-base leading-relaxed text-slate-500 lg:mx-0">
+      <p className="mx-auto max-w-lg text-base leading-relaxed text-foreground0 lg:mx-0">
         Building clean, full-stack web experiences with React, Next.js, and
         modern TypeScript tooling.
       </p>
@@ -119,12 +119,12 @@ function HeroContent({ shouldReduceMotion }: { shouldReduceMotion: boolean }) {
         {HERO_STAT_CHIPS.map((chip) => (
           <span
             key={chip.label}
-            className="inline-flex items-center gap-2 rounded-full border border-[var(--color-surface-2)] bg-[var(--color-surface)] px-3 py-1.5"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5"
           >
-            <span className="font-display text-sm font-bold text-cyan-400">
+            <span className="font-display text-sm font-bold text-accent">
               {chip.value}
             </span>
-            <span className="text-xs text-slate-500">{chip.label}</span>
+            <span className="text-xs text-foreground0">{chip.label}</span>
           </span>
         ))}
       </div>
@@ -142,9 +142,9 @@ function HeroContent({ shouldReduceMotion }: { shouldReduceMotion: boolean }) {
   return (
     <>
       <motion.div variants={nameMotion} initial="hidden" animate="visible">
-        <div className="mx-auto mb-6 h-[3px] w-10 rounded-full bg-cyan-400 lg:mx-0" />
-        <h1 className="font-display text-5xl font-black leading-[1.05] tracking-tight text-slate-50 sm:text-6xl lg:text-6xl xl:text-7xl">
-          <span className="text-cyan-400">{accentWord}</span> {restOfName}
+        <div className="mx-auto mb-6 h-[3px] w-10 rounded-full bg-accent lg:mx-0" />
+        <h1 className="font-display text-5xl font-black leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-6xl xl:text-7xl">
+          <span className="text-accent">{accentWord}</span> {restOfName}
         </h1>
       </motion.div>
       <motion.div variants={roleMotion} initial="hidden" animate="visible">
@@ -154,7 +154,7 @@ function HeroContent({ shouldReduceMotion }: { shouldReduceMotion: boolean }) {
         variants={bodyMotion}
         initial="hidden"
         animate="visible"
-        className="font-mono text-xs tracking-wide text-slate-500 sm:text-sm"
+        className="font-mono text-xs tracking-wide text-foreground0 sm:text-sm"
       >
         {HERO_PROOF}
       </motion.p>
@@ -162,7 +162,7 @@ function HeroContent({ shouldReduceMotion }: { shouldReduceMotion: boolean }) {
         variants={bodyMotion}
         initial="hidden"
         animate="visible"
-        className="mx-auto max-w-lg text-base leading-relaxed text-slate-500 lg:mx-0"
+        className="mx-auto max-w-lg text-base leading-relaxed text-foreground0 lg:mx-0"
       >
         Building clean, full-stack web experiences with React, Next.js, and
         modern TypeScript tooling.
@@ -176,12 +176,12 @@ function HeroContent({ shouldReduceMotion }: { shouldReduceMotion: boolean }) {
         {HERO_STAT_CHIPS.map((chip) => (
           <span
             key={chip.label}
-            className="inline-flex items-center gap-2 rounded-full border border-[var(--color-surface-2)] bg-[var(--color-surface)] px-3 py-1.5"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5"
           >
-            <span className="font-display text-sm font-bold text-cyan-400">
+            <span className="font-display text-sm font-bold text-accent">
               {chip.value}
             </span>
-            <span className="text-xs text-slate-500">{chip.label}</span>
+            <span className="text-xs text-foreground0">{chip.label}</span>
           </span>
         ))}
       </motion.div>
@@ -217,7 +217,7 @@ export default function Hero() {
 
   return (
     <section
-      className="dot-grid relative flex min-h-screen items-center overflow-hidden bg-gray-950 py-24 lg:py-32"
+      className="dot-grid relative flex min-h-screen items-center overflow-hidden bg-background py-24 lg:py-32"
       onMouseMove={handleMouseMove}
     >
       <Container>
@@ -245,16 +245,16 @@ export default function Hero() {
                 href={CURRENTLY_BUILDING.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute -bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full border border-cyan-500/30 bg-[var(--color-bg)]/95 px-4 py-2 shadow-lg backdrop-blur-sm transition-colors hover:border-cyan-400/50 lg:left-auto lg:translate-x-0 lg:-right-4"
+                className="absolute -bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full border border-accent-border bg-background/95 px-4 py-2 shadow-lg backdrop-blur-sm transition-colors hover:border-accent lg:left-auto lg:translate-x-0 lg:-right-4"
               >
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
                 </span>
-                <span className="text-xs text-slate-400">
+                <span className="text-xs text-muted">
                   {CURRENTLY_BUILDING.label}
                 </span>
-                <span className="text-xs font-medium text-cyan-400">
+                <span className="text-xs font-medium text-accent">
                   {CURRENTLY_BUILDING.project}
                 </span>
               </Link>
@@ -268,7 +268,7 @@ export default function Hero() {
 }
 
 const buttonBaseClass =
-  "inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950";
+  "inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
 function HeroPrimaryButton({
   href,
@@ -280,7 +280,7 @@ function HeroPrimaryButton({
   return (
     <Link
       href={href}
-      className={`${buttonBaseClass} bg-cyan-500 font-semibold text-gray-950 hover:bg-cyan-400`}
+      className={`${buttonBaseClass} bg-accent font-semibold text-accent-foreground hover:bg-accent-hover`}
     >
       {children}
     </Link>
@@ -297,7 +297,7 @@ function HeroSecondaryButton({
   return (
     <Link
       href={href}
-      className={`${buttonBaseClass} border border-slate-600 text-slate-300 hover:border-cyan-500 hover:text-cyan-400`}
+      className={`${buttonBaseClass} border border-border-strong text-secondary hover:border-accent hover:text-accent`}
     >
       {children}
     </Link>

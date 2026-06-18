@@ -77,14 +77,14 @@ function MobileNavPanelContent({
 }) {
   return (
     <>
-      <div className="flex items-center justify-between border-b border-[var(--color-surface-2)] px-6 py-5">
-        <span className="text-sm font-medium tracking-wide text-slate-400">
+      <div className="flex items-center justify-between border-b border-border px-6 py-5">
+        <span className="text-sm font-medium tracking-wide text-muted">
           Menu
         </span>
         <button
           type="button"
           onClick={onClose}
-          className="flex h-10 w-10 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-[var(--color-surface)] hover:text-cyan-400"
+          className="flex h-10 w-10 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface hover:text-accent"
           aria-label="Close menu"
         >
           <svg
@@ -115,12 +115,12 @@ function MobileNavPanelContent({
                   onClick={onClose}
                   className={`flex items-center gap-4 rounded-lg py-3 pl-4 pr-3 text-lg font-medium transition-colors ${
                     isActive
-                      ? "border-l-2 border-cyan-400 bg-[var(--color-surface)] text-cyan-400"
-                      : "border-l-2 border-transparent text-slate-400 hover:bg-[var(--color-surface)]/60 hover:text-slate-100"
+                      ? "border-l-2 border-accent bg-surface text-accent"
+                      : "border-l-2 border-transparent text-muted hover:bg-surface/60 hover:text-foreground"
                   }`}
                 >
                   <span
-                    className="font-mono text-xs text-slate-600"
+                    className="font-mono text-xs text-faint"
                     aria-hidden
                   >
                     {String(index + 1).padStart(2, "0")}
@@ -133,11 +133,11 @@ function MobileNavPanelContent({
         </ul>
       </nav>
 
-      <div className="border-t border-[var(--color-surface-2)] px-6 py-6">
+      <div className="border-t border-border px-6 py-6">
         <Link
           href="/#contact"
           onClick={onClose}
-          className="mb-6 flex w-full items-center justify-center rounded-xl bg-cyan-500 px-6 py-3 text-sm font-semibold text-gray-950 transition-colors duration-200 hover:bg-cyan-400"
+          className="mb-6 flex w-full items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition-colors duration-200 hover:bg-accent-hover"
         >
           Get in touch
         </Link>
@@ -152,7 +152,7 @@ function MobileNavPanelContent({
                 target: "_blank",
                 rel: "noopener noreferrer",
               })}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-surface-2)] text-slate-400 transition-colors hover:border-cyan-700 hover:text-cyan-400"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-accent-border hover:text-accent"
             >
               {social.icon}
             </Link>
@@ -243,7 +243,7 @@ export default function MobileNav({
             <button
               type="button"
               aria-label="Close menu"
-              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-40 bg-scrim backdrop-blur-sm md:hidden"
               onClick={handleClose}
             />
             <div
@@ -252,7 +252,7 @@ export default function MobileNav({
               role="dialog"
               aria-modal="true"
               aria-label="Mobile navigation"
-              className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-[var(--color-surface-2)] bg-[var(--color-bg)]/95 backdrop-blur-xl md:hidden"
+              className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-border bg-background/95 backdrop-blur-xl md:hidden"
             >
               <MobileNavPanelContent onClose={handleClose} pathname={pathname} />
             </div>
@@ -262,7 +262,7 @@ export default function MobileNav({
             <motion.button
               type="button"
               aria-label="Close menu"
-              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-40 bg-scrim backdrop-blur-sm md:hidden"
               onClick={handleClose}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -276,7 +276,7 @@ export default function MobileNav({
               role="dialog"
               aria-modal="true"
               aria-label="Mobile navigation"
-              className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-[var(--color-surface-2)] bg-[var(--color-bg)]/95 backdrop-blur-xl md:hidden"
+              className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-border bg-background/95 backdrop-blur-xl md:hidden"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}

@@ -29,8 +29,8 @@ const techCategories = [
 
 function TechPill({ tech }: { tech: string }) {
   return (
-    <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-cyan-800/40 bg-cyan-950/30 px-3 py-1 text-xs font-medium text-cyan-200/90">
-      <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" aria-hidden />
+    <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-tag-border/40 bg-tag/30 px-3 py-1 text-xs font-medium text-accent/90">
+      <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
       {tech}
     </span>
   );
@@ -48,14 +48,14 @@ function CategoryRow({
   const duplicated = [...group.technologies, ...group.technologies];
 
   return (
-    <div className="category-row group/row relative overflow-hidden rounded-lg border border-[var(--color-surface-2)] bg-[var(--color-surface)]">
+    <div className="category-row group/row relative overflow-hidden rounded-lg border border-border bg-surface">
       <span
-        className="absolute inset-y-0 left-0 w-0.5 bg-cyan-500/60"
+        className="absolute inset-y-0 left-0 w-0.5 bg-accent/60"
         aria-hidden
       />
 
       <div className="flex items-center gap-3 py-2 pl-3 pr-0 sm:gap-4 sm:py-2.5 sm:pl-4">
-        <span className="w-[5.25rem] shrink-0 font-mono text-[10px] font-semibold uppercase leading-tight tracking-wider text-cyan-400/80 sm:w-[6.5rem] sm:text-[11px]">
+        <span className="w-[5.25rem] shrink-0 font-mono text-[10px] font-semibold uppercase leading-tight tracking-wider text-accent/80 sm:w-[6.5rem] sm:text-[11px]">
           {group.category}
         </span>
 

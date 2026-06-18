@@ -20,15 +20,15 @@ export default function SectionHeader({
 
   return (
     <div className={`mb-12 ${alignClass} ${className}`}>
-      <p className="mb-3 font-mono text-xs tracking-widest text-cyan-400/90 sm:text-sm">
+      <p className="mb-3 font-mono text-xs tracking-widest text-accent/90 sm:text-sm">
         {label}
       </p>
-      <h2 className="font-display text-2xl font-bold tracking-tight text-slate-50 sm:text-3xl">
+      <h2 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
         {title}
       </h2>
       {subtitle && (
         <p
-          className={`mt-3 max-w-2xl text-base text-slate-400 sm:text-lg ${
+          className={`mt-3 max-w-2xl text-base text-muted sm:text-lg ${
             align === "center" ? "mx-auto" : ""
           }`}
         >

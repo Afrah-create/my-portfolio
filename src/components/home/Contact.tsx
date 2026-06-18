@@ -20,8 +20,7 @@ type FormErrors = Partial<Record<keyof FormFields, string>>;
 
 const emptyForm: FormFields = { name: "", email: "", message: "" };
 
-const fieldBaseClass =
-  "w-full rounded-lg border bg-[var(--color-bg)] px-4 py-2.5 text-sm text-slate-100 outline-none transition-colors placeholder:text-slate-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/40";
+const fieldBaseClass = "field-input";
 
 const fieldErrorClass =
   "border-red-500/80 focus:border-red-500 focus:ring-red-500/30";
@@ -163,7 +162,7 @@ export default function Contact() {
   };
 
   const getFieldClass = (field: keyof FormFields) =>
-    `${fieldBaseClass} ${errors[field] ? fieldErrorClass : "border-[var(--color-surface-2)]"}`;
+    `${fieldBaseClass} ${errors[field] ? fieldErrorClass : "border-border"}`;
 
   return (
     <section id="contact" className="section-divider section-surface scroll-mt-24 py-20">
@@ -175,14 +174,14 @@ export default function Contact() {
         />
 
         <AnimatedSection>
-          <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-[var(--color-surface-2)] bg-[var(--color-bg)] ring-1 ring-slate-800/40">
+          <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-border bg-background ring-1 ring-border/40">
             <div className="grid lg:grid-cols-5">
               {/* Contact channels */}
-              <div className="border-b border-[var(--color-surface-2)] p-6 sm:p-8 lg:col-span-2 lg:border-b-0 lg:border-r">
-                <p className="mb-1 font-mono text-xs tracking-wider text-cyan-400">
+              <div className="border-b border-border p-6 sm:p-8 lg:col-span-2 lg:border-b-0 lg:border-r">
+                <p className="mb-1 font-mono text-xs tracking-wider text-accent">
                   Direct reach
                 </p>
-                <p className="mb-6 text-sm leading-relaxed text-slate-400">
+                <p className="mb-6 text-sm leading-relaxed text-muted">
                   Open to internships, collaborations, and freelance work.
                 </p>
 
@@ -194,16 +193,16 @@ export default function Contact() {
                         {...("external" in link && link.external
                           ? { target: "_blank", rel: "noopener noreferrer" }
                           : {})}
-                        className="group flex items-center gap-3 rounded-lg border border-[var(--color-surface-2)] bg-[var(--color-surface)]/50 px-3.5 py-3 transition-colors hover:border-cyan-800/50 hover:bg-cyan-500/5"
+                        className="group flex items-center gap-3 rounded-lg border border-border bg-surface/50 px-3.5 py-3 transition-colors hover:border-tag-border/50 hover:bg-accent/5"
                       >
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-slate-700/80 text-cyan-400 transition-colors group-hover:border-cyan-700">
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border-strong/80 text-accent transition-colors group-hover:border-accent-border">
                           {link.icon}
                         </span>
                         <div className="min-w-0">
-                          <p className="text-[10px] font-medium uppercase tracking-wider text-slate-500">
+                          <p className="text-[10px] font-medium uppercase tracking-wider text-foreground0">
                             {link.label}
                           </p>
-                          <p className="truncate text-sm text-slate-200">
+                          <p className="truncate text-sm text-secondary">
                             {link.value}
                           </p>
                         </div>
@@ -212,7 +211,7 @@ export default function Contact() {
                   ))}
                 </ul>
 
-                <p className="mt-6 border-t border-[var(--color-surface-2)] pt-5 text-xs text-slate-500">
+                <p className="mt-6 border-t border-border pt-5 text-xs text-foreground0">
                   Based in Uganda · Reach me anytime!
                 </p>
               </div>
@@ -232,9 +231,9 @@ export default function Contact() {
                       aria-live="polite"
                     >
                       <div className="mb-6 w-full max-w-xs">
-                        <div className="h-1 overflow-hidden rounded-full bg-slate-800">
+                        <div className="h-1 overflow-hidden rounded-full bg-progress-track">
                           <motion.div
-                            className="h-full rounded-full bg-cyan-400"
+                            className="h-full rounded-full bg-accent"
                             initial={{ width: "100%" }}
                             animate={{ width: "0%" }}
                             transition={{
@@ -249,7 +248,7 @@ export default function Contact() {
                         initial={{ scale: 0.6, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ type: "spring", stiffness: 400, damping: 22 }}
-                        className="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400"
+                        className="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-accent-border bg-accent/10 text-accent"
                         aria-hidden
                       >
                         <svg
@@ -267,13 +266,13 @@ export default function Contact() {
                         </svg>
                       </motion.div>
 
-                      <h3 className="font-display text-xl font-semibold text-slate-50">
+                      <h3 className="font-display text-xl font-semibold text-foreground">
                         Message received
                       </h3>
-                      <p className="mt-2 max-w-xs text-sm leading-relaxed text-slate-400">
+                      <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted">
                         Thanks for reaching out — I&apos;ll get back to you soon.
                       </p>
-                      <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-slate-600">
+                      <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-faint">
                         Resetting form…
                       </p>
                     </motion.div>
@@ -291,7 +290,7 @@ export default function Contact() {
                       <div>
                         <label
                           htmlFor="contact-name"
-                          className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-slate-400"
+                          className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-muted"
                         >
                           Name
                         </label>
@@ -323,7 +322,7 @@ export default function Contact() {
                       <div>
                         <label
                           htmlFor="contact-email"
-                          className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-slate-400"
+                          className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-muted"
                         >
                           Email
                         </label>
@@ -355,7 +354,7 @@ export default function Contact() {
                       <div>
                         <label
                           htmlFor="contact-message"
-                          className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-slate-400"
+                          className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-muted"
                         >
                           Message
                         </label>
@@ -387,7 +386,7 @@ export default function Contact() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-500 px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
+                        className="btn-primary inline-flex w-full items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-70"
                       >
                         {isSubmitting && (
                           <motion.span
@@ -397,7 +396,7 @@ export default function Contact() {
                               duration: 0.8,
                               ease: "linear",
                             }}
-                            className="inline-block h-4 w-4 rounded-full border-2 border-gray-950 border-t-transparent"
+                            className="inline-block h-4 w-4 rounded-full border-2 border-accent-foreground border-t-transparent"
                             aria-hidden
                           />
                         )}

@@ -31,11 +31,11 @@ export default function SectionTitle({
 
   return (
     <div className={`mb-12 text-center ${className}`}>
-      <h2 className="font-display mb-4 text-3xl font-bold text-slate-50 md:text-4xl">
+      <h2 className="font-display mb-4 text-3xl font-bold text-foreground md:text-4xl">
         {children}
       </h2>
       {subtitle && (
-        <p className="mx-auto max-w-2xl text-lg text-slate-400">{subtitle}</p>
+        <p className="mx-auto max-w-2xl text-lg text-muted">{subtitle}</p>
       )}
     </div>
   );

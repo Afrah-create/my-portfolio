@@ -46,7 +46,7 @@ function SpotlightProject({ project }: { project: Project }) {
                 />
               </motion.div>
             )}
-            <span className="absolute left-4 top-4 rounded-full border border-cyan-500/40 bg-cyan-500/10 px-3 py-1 font-mono text-xs text-cyan-400">
+            <span className="absolute left-4 top-4 rounded-full border border-accent-border bg-accent/10 px-3 py-1 font-mono text-xs text-accent">
               Spotlight
             </span>
           </div>
@@ -57,23 +57,23 @@ function SpotlightProject({ project }: { project: Project }) {
             {project.techStack.map((tech) => (
               <span
                 key={tech}
-                className="rounded-full border border-cyan-800 bg-cyan-950 px-2.5 py-0.5 text-xs text-cyan-400"
+                className="rounded-full border border-tag-border bg-tag px-2.5 py-0.5 text-xs text-accent"
               >
                 {tech}
               </span>
             ))}
           </div>
-          <h3 className="font-display mb-3 text-2xl font-bold text-slate-50 lg:text-3xl">
+          <h3 className="font-display mb-3 text-2xl font-bold text-foreground lg:text-3xl">
             {project.title}
           </h3>
-          <p className="mb-6 leading-relaxed text-slate-400">
+          <p className="mb-6 leading-relaxed text-muted">
             {project.description}
           </p>
           <Link
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex w-fit items-center rounded-xl bg-cyan-500 px-5 py-2.5 text-sm font-semibold text-gray-950 transition-colors hover:bg-cyan-400"
+            className="inline-flex w-fit items-center rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-hover"
           >
             View live project →
           </Link>
@@ -122,13 +122,13 @@ function SecondaryProjectCard({ project }: { project: Project }) {
         ))}
 
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="mb-2 font-display font-semibold text-slate-100">
+        <h3 className="mb-2 font-display font-semibold text-foreground">
           {project.title}
         </h3>
-        <p className="mb-3 line-clamp-2 text-sm text-slate-400">
+        <p className="mb-3 line-clamp-2 text-sm text-muted">
           {project.description}
         </p>
-        <span className="mt-auto text-sm text-cyan-400">View project →</span>
+        <span className="mt-auto text-sm text-accent">View project →</span>
       </div>
     </Card>
   );

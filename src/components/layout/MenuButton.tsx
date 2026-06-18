@@ -28,7 +28,7 @@ export default function MenuButton({ open, onClick, buttonRef }: MenuButtonProps
     <button
       ref={buttonRef}
       type="button"
-      className="relative z-[60] flex h-11 w-11 items-center justify-center rounded-lg text-slate-400 transition-colors hover:text-cyan-400 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 md:hidden"
+      className="relative z-[60] flex h-11 w-11 items-center justify-center rounded-lg text-muted transition-colors hover:text-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background md:hidden"
       onClick={onClick}
       aria-expanded={open}
       aria-controls="mobile-navigation"

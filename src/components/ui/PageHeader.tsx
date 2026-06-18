@@ -21,15 +21,15 @@ export default function PageHeader({
 
   return (
     <div className={`${alignClass} ${className}`}>
-      <p className="mb-3 font-mono text-sm tracking-wider text-cyan-400">
+      <p className="mb-3 font-mono text-sm tracking-wider text-accent">
         {label}
       </p>
-      <h1 className="font-display text-4xl font-bold tracking-tight text-slate-50 sm:text-5xl md:text-6xl">
+      <h1 className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
         {title}
       </h1>
       {subtitle && (
         <p
-          className={`mt-5 text-base text-slate-400 sm:text-lg ${subtitleClass}`}
+          className={`mt-5 text-base text-muted sm:text-lg ${subtitleClass}`}
         >
           {subtitle}
         </p>
