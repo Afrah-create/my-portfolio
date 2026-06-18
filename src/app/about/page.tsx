@@ -1,9 +1,9 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 import Container from "@/components/layout/Container";
 import PageHeader from "@/components/ui/PageHeader";
+import ProfilePortrait from "@/components/ui/ProfilePortrait";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { SKILLS } from "@/lib/constants";
 import { staggerContainer, staggerItem } from "@/lib/motion";
@@ -55,18 +55,7 @@ export default function AboutPage() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="lg:col-span-1"
             >
-              <div className="relative mx-auto max-w-80 lg:max-w-none">
-                <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-slate-700/60 ring-1 ring-slate-800">
-                  <Image
-                    src="/profile.jpg"
-                    alt="Awongo Fahadi Rashid"
-                    fill
-                    className="object-cover"
-                    priority
-                    sizes="(max-width: 1024px) 320px, 33vw"
-                  />
-                </div>
-              </div>
+              <ProfilePortrait variant="about" priority className="lg:max-w-none" />
 
               <div className="mt-8 grid grid-cols-3 gap-3">
                 {stats.map((stat) => (

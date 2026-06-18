@@ -9,9 +9,9 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/layout/Container";
+import ProfilePortrait from "@/components/ui/ProfilePortrait";
 import { fadeUp } from "@/lib/motion";
 
 const fullName = "Awongo Fahadi Rashid";
@@ -182,7 +182,7 @@ export default function Hero() {
 
           {shouldReduceMotion ? (
             <div className="order-1 w-full lg:order-2">
-              <ProfileImage />
+              <ProfilePortrait variant="hero" priority />
             </div>
           ) : (
             <motion.div
@@ -192,7 +192,7 @@ export default function Hero() {
               className="order-1 w-full lg:order-2"
               style={{ x: imageX, y: imageY }}
             >
-              <ProfileImage />
+              <ProfilePortrait variant="hero" priority />
             </motion.div>
           )}
         </div>
@@ -236,25 +236,5 @@ function HeroSecondaryButton({
     >
       {children}
     </Link>
-  );
-}
-
-function ProfileImage() {
-  return (
-    <figure className="w-full">
-      <div className="overflow-hidden rounded-2xl border border-slate-700/60 shadow-[0_8px_40px_rgba(0,0,0,0.45)]">
-        <div className="relative aspect-[4/5] w-full">
-          <Image
-            src="/profile.jpg"
-            alt="Awongo Fahadi Rashid"
-            fill
-            className="object-cover object-top"
-            priority
-            sizes="(max-width: 1024px) 100vw, 38vw"
-          />
-        </div>
-      </div>
-      <figcaption className="sr-only">Portrait of Awongo Fahadi Rashid</figcaption>
-    </figure>
   );
 }
