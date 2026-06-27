@@ -26,8 +26,8 @@ export const projects: Project[] = [
     description:
       "A web-based school management platform with secure authentication and role-based workflows for administrators, teachers, and staff to manage school operations online.",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-    link: "https://school-management-systme-web.vercel.app/login",
-    image: "/projects/school.png",
+    link: "https://schoolmanage.slimcybertech.com/",
+    image: "/projects/SchoolManage.png",
 
   },
   {
@@ -47,15 +47,6 @@ export const projects: Project[] = [
     link: "https://afrah-create.github.io/Bweranyangi-Girls-Group-G/",
     github: "https://github.com/Afrah-Create/Bweranyangi-Girls-Group-G",
     image: "/projects/school.png",
-  },
-  {
-    id: "3",
-    title: "Portfolio Website",
-    description: "A responsive portfolio website built with React and styled-components to showcase projects and skills.",
-    techStack: ["React", "styled-components", "Framer Motion", "React Icons"],
-    link: "https://afrah-create.github.io/portfolio/",
-    github: "https://github.com/Afrah-Create/portfolio",
-    image: "/projects/potfolio.JPG",
   },
   {
     id: "4",
@@ -99,6 +90,7 @@ export const projects: Project[] = [
     description: "An organization website dedicated to raising funds for children in need with donor support and outreach.",
     techStack: ["HTML5", "CSS3", "JavaScript"],
     link: "https://www.centerfortomorrow.org",
+    image: "/projects/cft.png",
   },
 ];
 

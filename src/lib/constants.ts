@@ -52,5 +52,5 @@ export const HERO_STAT_CHIPS = [
 export const CURRENTLY_BUILDING = {
   label: "Currently building",
   project: "School Management System",
-  href: "https://school-management-systme-web.vercel.app/login",
+  href: "https://schoolmanage.slimcybertech.com",
 } as const;
