@@ -1,12 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { liveProjects, projects } from "@/data/projects";
 import { Project } from "@/types/project";
 import { Card } from "@/components/ui/Card";
 import ProjectImage from "@/components/projects/ProjectImage";
+import ProjectActions from "@/components/projects/ProjectActions";
 import { springTransition } from "@/lib/motion";
 
 const allTechTags = Array.from(
@@ -63,7 +63,9 @@ function ProjectGridCard({ project }: { project: Project }) {
           src={project.image}
           alt={`${project.title} preview`}
           variant="card"
+          tone={project.imageTone}
           showHoverHint
+          hoverHint={project.download ? "Download APK →" : "View project →"}
         />
       )}
 
@@ -86,48 +88,10 @@ function ProjectGridCard({ project }: { project: Project }) {
           {project.description}
         </p>
 
-        <div className="mt-auto flex flex-wrap gap-4">
-          <Link
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] items-center py-2 text-sm text-accent transition-colors hover:text-accent-hover"
-          >
-            Live Demo
-            <svg
-              className="ml-1 h-4 w-4"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </Link>
-          {project.github && (
-            <Link
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-[44px] items-center py-2 text-sm text-muted transition-colors hover:text-secondary"
-            >
-              GitHub
-              <svg
-                className="ml-1 h-4 w-4"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </Link>
-          )}
-        </div>
+        <ProjectActions project={project} variant="card" />
+        {project.download?.hint && (
+          <p className="mt-1 text-xs text-faint">{project.download.hint}</p>
+        )}
       </div>
     </Card>
   );
@@ -142,6 +106,7 @@ function FeaturedProject({ project }: { project: Project }) {
             src={project.image}
             alt={`${project.title} preview`}
             variant="spotlight"
+            tone={project.imageTone}
             badge={
               <span className="absolute left-4 top-4 z-10 rounded-full border border-accent-border bg-accent/10 px-3 py-1 font-mono text-xs text-accent backdrop-blur-sm">
                 Featured
@@ -167,26 +132,10 @@ function FeaturedProject({ project }: { project: Project }) {
           <p className="mb-6 leading-relaxed text-muted">
             {project.description}
           </p>
-          <div className="flex flex-wrap gap-4">
-            <Link
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-[44px] items-center rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-hover"
-            >
-              View Live Demo
-            </Link>
-            {project.github && (
-              <Link
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] items-center rounded-xl border border-border-strong px-5 py-2.5 text-sm font-medium text-secondary transition-colors hover:border-accent hover:text-accent"
-              >
-                GitHub
-              </Link>
-            )}
-          </div>
+          <ProjectActions project={project} variant="featured" />
+          {project.download?.hint && (
+            <p className="mt-3 text-xs text-faint">{project.download.hint}</p>
+          )}
         </div>
       </div>
     </Card>
@@ -198,9 +147,8 @@ export default function ProjectsGrid() {
   const shouldReduceMotion = useReducedMotion();
 
   const filteredProjects = useMemo(() => {
-    const rest = projects.slice(1);
-    if (!activeTag) return rest;
-    return rest.filter((project) => project.techStack.includes(activeTag));
+    if (!activeTag) return projects.slice(1);
+    return projects.filter((project) => project.techStack.includes(activeTag));
   }, [activeTag]);
 
   return (

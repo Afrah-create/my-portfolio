@@ -8,9 +8,11 @@ type ProjectImageProps = {
   src: string;
   alt: string;
   variant?: "card" | "spotlight";
+  tone?: "mark";
   priority?: boolean;
   badge?: ReactNode;
   showHoverHint?: boolean;
+  hoverHint?: string;
 };
 
 const frameStyles = {
@@ -22,11 +24,14 @@ export default function ProjectImage({
   src,
   alt,
   variant = "card",
+  tone,
   priority = false,
   badge,
   showHoverHint = false,
+  hoverHint = "View project →",
 }: ProjectImageProps) {
   const shouldReduceMotion = useReducedMotion();
+  const isMark = tone === "mark";
 
   const image = (
     <Image
@@ -34,7 +39,11 @@ export default function ProjectImage({
       alt={alt}
       fill
       priority={priority}
-      className="object-contain object-center p-3 sm:p-4"
+      className={
+        isMark
+          ? "object-contain object-center p-10 sm:p-14"
+          : "object-contain object-center p-3 sm:p-4"
+      }
       sizes={
         variant === "spotlight"
           ? "(max-width: 1024px) 100vw, 50vw"
@@ -45,7 +54,9 @@ export default function ProjectImage({
 
   return (
     <div
-      className={`group/image relative w-full overflow-hidden border-b border-border bg-surface ${frameStyles[variant]}`}
+      className={`group/image relative w-full overflow-hidden border-b border-border ${
+        isMark ? "bg-[#2A241D]" : "bg-surface"
+      } ${frameStyles[variant]}`}
     >
       {shouldReduceMotion ? (
         image
@@ -64,7 +75,7 @@ export default function ProjectImage({
       {showHoverHint && !shouldReduceMotion && (
         <div className="pointer-events-none absolute inset-0 flex items-end bg-transparent p-4 transition-colors duration-300 group-hover/image:bg-overlay/40">
           <span className="translate-y-2 text-sm font-medium text-accent opacity-0 transition-all duration-300 group-hover/image:translate-y-0 group-hover/image:opacity-100">
-            View project →
+            {hoverHint}
           </span>
         </div>
       )}

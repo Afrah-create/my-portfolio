@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   homeSecondaryProjects,
   homeSpotlightProject,
+  projectPrimaryHref,
 } from "@/data/projects";
 import { Project } from "@/types/project";
 import Container from "@/components/layout/Container";
@@ -13,6 +13,7 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Card } from "@/components/ui/Card";
 import SectionHeader from "@/components/ui/SectionHeader";
 import ProjectImage from "@/components/projects/ProjectImage";
+import ProjectActions from "@/components/projects/ProjectActions";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 
 function SpotlightProject({ project }: { project: Project }) {
@@ -24,6 +25,7 @@ function SpotlightProject({ project }: { project: Project }) {
             src={project.image}
             alt={`${project.title} preview`}
             variant="spotlight"
+            tone={project.imageTone}
             badge={
               <span className="absolute left-4 top-4 z-10 rounded-full border border-accent-border bg-accent/10 px-3 py-1 font-mono text-xs text-accent backdrop-blur-sm">
                 Spotlight
@@ -49,14 +51,10 @@ function SpotlightProject({ project }: { project: Project }) {
           <p className="mb-6 leading-relaxed text-muted">
             {project.description}
           </p>
-          <Link
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] w-full items-center justify-center rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-hover sm:w-fit"
-          >
-            View live project →
-          </Link>
+          <ProjectActions project={project} variant="featured" />
+          {project.download?.hint && (
+            <p className="mt-3 text-xs text-faint">{project.download.hint}</p>
+          )}
         </div>
       </div>
     </Card>
@@ -64,20 +62,19 @@ function SpotlightProject({ project }: { project: Project }) {
 }
 
 function SecondaryProjectCard({ project }: { project: Project }) {
-  return (
-    <Card
-      href={project.link}
-      glowOnHover
-      className="group flex h-full flex-col overflow-hidden p-0"
-    >
+  const href = projectPrimaryHref(project);
+  const downloadOnly = project.download && !project.link ? project.download : undefined;
+
+  const body = (
+    <>
       {project.image && (
         <ProjectImage
           src={project.image}
           alt={`${project.title} preview`}
           variant="card"
+          tone={project.imageTone}
         />
       )}
-
       <div className="flex flex-1 flex-col p-5">
         <h3 className="mb-2 font-display font-semibold text-foreground">
           {project.title}
@@ -85,8 +82,34 @@ function SecondaryProjectCard({ project }: { project: Project }) {
         <p className="mb-3 line-clamp-3 text-sm text-muted sm:line-clamp-2">
           {project.description}
         </p>
-        <span className="mt-auto text-sm text-accent">View project →</span>
+        <span className="mt-auto text-sm text-accent">
+          {downloadOnly ? "Download APK →" : "View project →"}
+        </span>
       </div>
+    </>
+  );
+
+  if (downloadOnly) {
+    return (
+      <a
+        href={downloadOnly.href}
+        download={downloadOnly.filename}
+        className="block h-full no-underline"
+      >
+        <Card glowOnHover className="group flex h-full flex-col overflow-hidden p-0">
+          {body}
+        </Card>
+      </a>
+    );
+  }
+
+  return (
+    <Card
+      href={href}
+      glowOnHover
+      className="group flex h-full flex-col overflow-hidden p-0"
+    >
+      {body}
     </Card>
   );
 }

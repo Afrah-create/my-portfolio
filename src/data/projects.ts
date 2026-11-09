@@ -2,6 +2,21 @@ import { Project } from "@/types/project";
 
 export const projects: Project[] = [
   {
+    id: "12",
+    title: "CucoCare",
+    description:
+      "An offline-first Android app for poultry farm management — batch records, age-based vaccination schedules, feed tracking, and farm record-keeping that works without a network connection.",
+    techStack: ["Flutter", "Dart", "SQLite", "Android"],
+    image: "/projects/hen_mark_mask.png",
+    imageTone: "mark",
+    download: {
+      href: "/apk/cucocare.apk",
+      label: "Download APK",
+      filename: "CucoCare.apk",
+      hint: "Android APK · 81 MB",
+    },
+  },
+  {
     id: "11",
     title: "MAMSA Online Voting",
     description:
@@ -96,9 +111,15 @@ export const projects: Project[] = [
 
 const PLACEHOLDER_PATTERNS = ["example.com", "username"];
 
-/** Projects with real, deployable links (excludes demo placeholders). */
+/** Projects visitors can open or download (excludes demo placeholders). */
 export function isLiveProject(project: Project): boolean {
-  return !PLACEHOLDER_PATTERNS.some((pattern) => project.link.includes(pattern));
+  if (project.download) return true;
+  if (!project.link) return false;
+  return !PLACEHOLDER_PATTERNS.some((pattern) => project.link!.includes(pattern));
+}
+
+export function projectPrimaryHref(project: Project): string | undefined {
+  return project.link ?? project.download?.href;
 }
 
 export const liveProjects = projects.filter(isLiveProject);
