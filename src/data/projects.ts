@@ -13,7 +13,7 @@ export const projects: Project[] = [
       href: "/apk/cucocare.apk",
       label: "Download APK",
       filename: "CucoCare.apk",
-      hint: "Android APK · 81 MB",
+      hint: "Android APK · 27.7 MB",
     },
   },
   {
