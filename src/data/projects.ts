@@ -17,7 +17,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "11",
+    id: "13",
     title: "MAMSA Online Voting Platform",
     description:
       "An online voting platform for the Madi' Makerere Students Association — student registration, secure ballot casting, one vote per student, and automated results publishing when elections close.",
@@ -100,7 +100,7 @@ export const projects: Project[] = [
     image: "/projects/Easton.jpeg",
   },
   {
-    id: "13",
+    id: "11",
     title: "Slim Cyber Tech Company Website",
     description: "A responisve website for SlimCyber Techologies Limitied build with React",
     techStack: ["Next.js", "Tailwind", "React", "Framer motion"],
