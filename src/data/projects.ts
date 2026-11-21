@@ -102,7 +102,7 @@ export const projects: Project[] = [
   {
     id: "11",
     title: "Slim Cyber Tech Company Website",
-    description: "A responisve website for SlimCyber Techologies Limitied build with React",
+    description: "A responisve website for SlimCyber Techologies Limited based in West Nile, Uganda, built with React",
     techStack: ["Next.js", "Tailwind", "React", "Framer motion"],
     link: "https://slimcybertech.com/",
     image: "/projects/slimcyber.png",
