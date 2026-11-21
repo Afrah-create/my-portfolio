@@ -18,7 +18,7 @@ export const projects: Project[] = [
   },
   {
     id: "11",
-    title: "MAMSA Online Voting",
+    title: "MAMSA Online Voting Platform",
     description:
       "An online voting platform for the Madi' Makerere Students Association — student registration, secure ballot casting, one vote per student, and automated results publishing when elections close.",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
@@ -98,6 +98,14 @@ export const projects: Project[] = [
     link: "https://easton-hill-3ul5.vercel.app/",
     github: "https://github.com/Afrah-create/easton_hill.git",
     image: "/projects/Easton.jpeg",
+  },
+  {
+    id: "13",
+    title: "Slim Cyber Tech Company Website",
+    description: "A responisve website for SlimCyber Techologies Limitied build with React",
+    techStack: ["Next.js", "Tailwind", "React", "Framer motion"],
+    link: "https://slimcybertech.com/",
+    image: "/projects/slimcyber.png",
   },
   {
     id: "8",
