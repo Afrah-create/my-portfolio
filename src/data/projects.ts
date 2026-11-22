@@ -11,7 +11,7 @@ export const projects: Project[] = [
     imageTone: "mark",
     link: "https://cuckocare-downloadsite.vercel.app/",
     download: {
-      href: "/apk/cucocare.apk",
+      href: "https://cuckocare-downloadsite.vercel.app/",
       label: "Download APK",
       filename: "CucoCare.apk",
       hint: "Android APK · 27.7 MB",
