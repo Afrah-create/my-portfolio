@@ -9,6 +9,7 @@ export const projects: Project[] = [
     techStack: ["Flutter", "Dart", "SQLite", "Android"],
     image: "/projects/hen_mark_mask.png",
     imageTone: "mark",
+    link: "https://cuckocare-downloadsite.vercel.app/",
     download: {
       href: "/apk/cucocare.apk",
       label: "Download APK",
